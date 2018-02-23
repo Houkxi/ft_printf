@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:42:46 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 16:47:37 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 18:48:22 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int		main()
 {
 	short	shrt = 58, sht2 = 6659;
-	int		i = 0, ex = -526, ex2 = -2147483647, ex3 = -2569, ret = 0;
+	int		i = 0, ex = -526, ex2 = 652, ex3 = -2569, ret = 0;
 	long	lng = 56987456311999;
 	long long	lngl = -99999999996, lngmax = 9223372036854775807, lngmin = -9223372036854775808;
 
@@ -27,7 +27,7 @@ int		main()
 
 	char	c = 'A';
 	char test = ex;
-	char	*s1 = "\n___Salut le monde _%13.12d_ _%.15l+16*d___  LAST : %s+++\n", *s2 = "This is a sentence";
+	char	*s1 = "\n___Salut le monde _%+11.7u_%#15.12X___  LAST : %s+++\n", *s2 = "This is a sentence";
 	char	*s3 = "TEST %lld %ld", *s4 = "_%*.*d_\n";
 
 	write(1, "Test \0 voir\n", 12);
@@ -35,8 +35,8 @@ int		main()
 	printf("ADD : _%*%_\n", 12);
 		printf("\n****	VA VOIR DANS INFO_PARS IL Y A UN BUF AVEC STOP_D	******\n\n");
 		//ret = ft_printf(s4, 0,11 ,ex2);
-		ft_printf(s1, ex2, 20, ex3, s2);
-		printf(s1, ex2, 20, ex3, s2);
+		ft_printf(s1, ex2, ex3, s2);
+		printf(s1, ex2, ex3, s2);
 		printf("\n RET = %#d\n\n", ret);
 /*
 	printf("+-------------------------LET'S START THIS SHIT-------------------------->\n");

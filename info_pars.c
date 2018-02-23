@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 15:39:09 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:37:55 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ unsigned char	flag_search(char *s, unsigned char sv, t_info ***data, int *xb)
 unsigned char	conv_search(char *s, unsigned char sv, t_info **data, int ch)
 {
 	int			x;
-	char		pt;
 
 	x = 0;
 	if (ch < 0)
@@ -144,7 +143,6 @@ char			type_check(char *s, t_info **data)
 {
 	int			x;
 	int			ret;
-	int			ret2;
 	char		*type;
 
 	x = 0;

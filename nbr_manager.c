@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 16:26:38 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 18:24:19 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ char		*unsigned_nbrs(va_list ***arg, t_info *data, int base)
 	return (save);
 }
 
+/*
+		ECRIRE CONDITION IF | BOUCLE WHILE FT_OCCURENCE
+							|
+							V
+*/
+
 char		*nbr_manager(va_list **arg, t_info *data)
 {
 	char *rendu;
@@ -70,8 +76,7 @@ char		*nbr_manager(va_list **arg, t_info *data)
 			data->flags |= PLUS_LL;
 		printf("%s\n", rendu);
 	}
-	else if (data->type == 'u' || data->type == 'U' || data->type == 'x' ||
-		data->type == 'X' || data->type == 'o' || data->type == 'O')
+	else if (ft_occ_pos("uUxXoO", data->type) > -1)
 	{
 		if (data->flags & PLUS_LL)
 			data->flags &= data->flags - PLUS_LL;

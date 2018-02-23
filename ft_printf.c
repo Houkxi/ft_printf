@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 16:47:19 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 17:37:29 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	show_it_all(char *s1, int size, int end, int len)
 	char			test[len + 1];
 	static char		*finl;
 	char			*tmp;
-	int try;
 
 
 	if (!finl)

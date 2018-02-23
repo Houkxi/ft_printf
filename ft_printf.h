@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 16:26:16 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 18:46:47 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,17 @@ int					data_init(va_list **arg, t_info *data, char *s);
 void				new_data(t_info **data);
 char				*chr_manager(va_list **arg, t_info *data);
 char				*nbr_manager(va_list **arg, t_info *data);
+char				*flag_hash(char *d, int size, int oldsize, t_info *data);
 char				*flag_manager(t_info *data, char *s);
+char				*flag_signs(char *d, int size, int sign, t_info *data);
+char				*flag_space(char *d, int size, t_info *data);
+char				*flag_prec(int prec, char *s, int size);
+char				*flag_mfield(int mfield, t_info *data, char *s);
 char				*ft_itoall(long long int n, int base, int size, int *sign);
 char				*ft_utoall(unsigned long long int n, int base, int size,
 	int sign);
+char				*ft_strfill(char *s, char c, int len);
+char				*ft_strdecal(char *d, char *s, int decl);
+char				*ft_strcpy_dir(char *d, char *s, int dir, int start);
 
 #endif
