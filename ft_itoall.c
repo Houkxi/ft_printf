@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:33:37 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/21 15:02:04 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/02/23 16:26:44 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,25 @@ char			*ft_utoall(unsigned long long int n, int base, int size, int sign)
 	return (tmp);
 }
 
-char			*ft_itoall(long long int n, int base, int size, int sign)
+char			*ft_itoall(long long int n, int base, int size, int *sign)
 {
 	char		*str;
 	static char	s[49];
 	char		*tmp;
 	int			value;
 
-//	printf("VOIR RES : %lld\n", n);
 	if (base < 2 || base > 16)
 		return (NULL);
 	str = "0123456789ABCDEF";
-	size = signed_count(n, 0, base) + 1;
-	ft_bzero(s, size + 1);
 	if (n < 0)
 	{
-		if (base == 10)
-			sign = 1;
+		*sign = -2;
 		n *= -1;
 	}
+	size = signed_count(n, 0, base) + 1;
+	ft_bzero(s, size + 1);
 	s[size] = '\0';
-	if (base == 10 && sign == 1)
-		s[0] = '-';
-	while (size-- > sign)
+	while (size-- > 0)
 	{
 		value = n % base;
 		s[size] = str[value];
