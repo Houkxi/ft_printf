@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 18:47:40 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 18:23:23 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char		*flag_signs(char *d, int size, int sign, t_info *data)
 	int		x;
 
 	x = 0;
-	printf("SIGNS TEST\n");
+	//printf("SIGNS TEST\n");
 	if (data->flags & MFIELD_HH)
 		new = d;
 	else
@@ -27,7 +27,7 @@ char		*flag_signs(char *d, int size, int sign, t_info *data)
 		new = ft_strdecal(new, d, 1);
 		new[size + 1] = '\0';
 	}
-	while (new[x] == ' ')
+	while (new[x] == ' ' && data->s_ct[1] != -5)
 		x++;
 	if (x > 0)
 		x -= 1;
@@ -74,7 +74,7 @@ char		*flag_hash(char *d, int size, int oldsize, t_info *data)
 		x++;
 	if (x > 0)
 		x -= 2;
-	new[x] = 'O';
+	new[x] = '0';
 	if (data->type == 'x')
 		new[x + 1] = 'x';
 	else if (data->type == 'X')
@@ -88,20 +88,20 @@ char		*flag_prec(int prec, char *s, int size)
 	int		sign;
 
 	sign = 0;
-	if (prec <= size)
-		return (s);
 	if ((new =(char*)malloc((prec + 1))) == NULL)
 		return (NULL);
 	new[prec] = '\0';
+	if (prec <= size)
+		return (ft_strcpy(new, s));
 	if (s[0] == '-')
 		sign = 1;
-	while (size >= sign && s[0] != '0')
+	while (size >= sign)
 	{
 		new[prec] = s[size];
 		prec--;
 		size--;
 	}
-	while (prec >= 0 && s[0] != '0')
+	while (prec >= 0)
 		new[prec--] = '0';
 	return (new);
 }
@@ -112,10 +112,11 @@ char		*flag_mfield(int mfield, t_info *data, char *s)
 
 	if ((size_t)mfield <= ft_strlen(s))
 		return (s);
+
 	if ((new =(char*)malloc(mfield + 1)) == NULL)
 		return (NULL);
 	new[mfield] = '\0';
-	if (data->flags & ZERO_Z && !(data->flags & DOT_H))
+	if (data->flags & ZERO_Z && !(data->flags & DOT_H)) /// GERER LE CAS %s avec 0
 		new = ft_strfill(new, '0', mfield);
 	else
 		new = ft_strfill(new, ' ', mfield);
@@ -123,6 +124,9 @@ char		*flag_mfield(int mfield, t_info *data, char *s)
 	{
 		if (data->flags & PLUS_LL || data->flags & SPACE)
 			new = ft_strdecal(new, s, 1);
+		else
+			ft_strdecal(new, s, 0);
+
 	}
 	else
 		new = ft_strcpy_dir(new, s, -1, mfield - 1);

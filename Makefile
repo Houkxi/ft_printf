@@ -6,7 +6,7 @@
 #    By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/23 16:56:10 by mmanley           #+#    #+#              #
-#    Updated: 2018/02/23 17:49:04 by mmanley          ###   ########.fr        #
+#    Updated: 2018/03/01 18:25:04 by mmanley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,13 +50,14 @@ $(OBJ_PATH)%.o: %.c
 	$(CC) $(FLAGS) -o $@ -c $< -I $(INC)
 
 run :
-	gcc -o ft_printf main.c libprintf.a ~/libft/libft.a -I $(INC) && ./ft_printf
+	@gcc -o ft_printf main.c checks/nbr_check.c libprintf.a ~/libft/libft.a -I $(INC) && ./ft_printf
 
 clean :
 	@rm -rf objs
 
 fclean : clean
 	@rm -rf $(NAME)
+	@rm ft_printf
 	@echo "Wanted files deleted : .a & .o"
 
 re : fclean all

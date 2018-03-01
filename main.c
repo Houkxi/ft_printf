@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:42:46 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 18:48:22 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 18:12:18 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,129 @@ int		main()
 
 	char	c = 'A';
 	char test = ex;
-	char	*s1 = "\n___Salut le monde _%+11.7u_%#15.12X___  LAST : %s+++\n", *s2 = "This is a sentence";
-	char	*s3 = "TEST %lld %ld", *s4 = "_%*.*d_\n";
+	char	*s1 = "\n___Salut le monde _% 011.215h16.25*.*h*.*d_%#15.12X___  LAST : %-15.5d+++\n", *s2 = "This is a sentence";
+	char	*s3 = "TEST %lld %ld", *s4 = "_%-+*d_\n";
+	char	*s5 = "_%20s_ petit test si possible\n", *s6 = "\n\n";
 
-	write(1, "Test \0 voir\n", 12);
-	printf("\n");
-	printf("ADD : _%*%_\n", 12);
-		printf("\n****	VA VOIR DANS INFO_PARS IL Y A UN BUF AVEC STOP_D	******\n\n");
-		//ret = ft_printf(s4, 0,11 ,ex2);
-		ft_printf(s1, ex2, ex3, s2);
-		printf(s1, ex2, ex3, s2);
-		printf("\n RET = %#d\n\n", ret);
+//ft_printf("|#		'# + - 0 15 L d'		: _%#0+---hh--hhh-++++++0015d_\n", ex2);
+
+	nbr_cmp();
+/*	ft_printf("_%0100.25s_\n", "Salut les gens");
+	printf("_%0100.25s_\n", "Salut les gens");*/
+/*
+	ft_printf(s1, 10, 12, 45, 20, ex2, ex3, ex2);
+	printf(s1, 10, 12, 45, 20, ex2, ex3, ex2);
+	ft_printf(s6);
+	ret = ft_printf(s5, s2);
+	ret = printf(s5, s2);
+	ft_printf(s6);
+	ft_printf(s4, 5, 0);
+	printf(s4, 5, 0);
+	ft_printf(s6);
+	ft_printf("TEST -> _%0*.*d_", 1, 0, 0);
+	printf("\n RET = %#d\n\n", ret);
+*/
+	/*char	*str = "%lc";
+	int		data = 1286;
+//	int		data = 123456;
+//
+	int ch;
+
+	char tab[20];
+	int fd = -100;
+
+	ft_bzero(tab, sizeof(tab));
+
+
+
+
+	printf("%+ .20jd\n", MAX_INT *4);
+	fflush(stdout);
+	ft_printf("%+ .20jd\n", MAX_INT*4);
+	ft_printf("%+ .20d\n", MIN_INT);
+	ft_printf("%+ .20d\n", 0);
+	printf("%+ .20d\n", 0);
+	fflush(stdout);
+	ft_printf("%+ .20d\n", 42);
+	ft_printf("%+ .20d\n", -42);
+
+	printf("%+ 30.0jd\n", MAX_INT *4);
+	fflush(stdout);
+	ft_printf("%+ 30.0jd\n", MAX_INT*4);
+	ft_printf("%+ 30.0d\n", MIN_INT);
+	ft_printf("%+ 30.0d\n", 42);
+	ft_printf("%+ 30.0d\n", -42);
+	ft_printf("1_%0 .d_\n", 0);
+	   printf("1_%0 .d_\n", 0);
+	fflush(stdout);
+
+	ft_printf("2_%0 1.d_\n", 0);
+	   printf("2_%0 1.d_\n", 0);
+	fflush(stdout);
+
+	ft_printf("3_%0 2.d_\n", 0);
+	   printf("3_%0 2.d_\n", 0);
+	fflush(stdout);
+
+	ft_printf("4_%0 3.d_\n", 0);
+	   printf("4_%0 3.d_\n", 0);
+	fflush(stdout);
+
+	ft_printf("5_%+-0 5.0jd_\n",0, 5,0,0);
+	   printf("5_%+-0 5.0jd_\n",0, 5,0,0);
+	fflush(stdout);
+*/
+
+//	ft_printf("%.5-.7+.l2 0hhhhhhhhhhhhh .*z42f*s", 50, 12,"bonjour");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+//	ft_printf("%5d");
+/*	data = -3;
+	while (data <= 270)
+	{
+		ft_putnbr(data);
+		ft_putstr("\n");
+		ft_putstr("printf \t\t>");
+		printf(str, data);
+		fflush(stdout);
+		ft_putstr("<\nftprintf \t>");
+		ft_printf(str, data);
+		ft_putstr("<\n\n");
+		data++;
+		if (data== 10)
+			data = 120;
+		if (data == 130)
+			data = 250;
+//		ft_temporize(1);
+	}
+
+
+	str = "%c";
+	data = -3;
+	while (data <= 270)
+	{
+		ft_putnbr(data);
+		ft_putstr("\n");
+		ft_putstr("printf \t\t>");
+		printf(str, data);
+		fflush(stdout);
+		ft_putstr("<\nftprintf \t>");
+		ft_printf(str, data);
+		ft_putstr("<\n\n");
+		data++;
+		if (data== 10)
+			data = 120;
+		if (data == 130)
+			data = 250;
+//		ft_temporize(1);
+	}*/
 /*
 	printf("+-------------------------LET'S START THIS SHIT-------------------------->\n");
 	printf("\n|*******************************NBRS 'D'*********************************|\n");

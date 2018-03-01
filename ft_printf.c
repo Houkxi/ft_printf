@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 17:37:29 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 12:22:11 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	show_it_all(char *s1, int size, int end, int len)
 	//printf ("SIZE : %s\n",s1);
 	if (end == 1)
 	{
-		printf("FINAL SIZE : %d\n", size);
+		//printf("FINAL SIZE : %d\n", size);
 		finl[size] = '\0';
 		write(1, finl, size);
-		printf("END\n");
+		//printf("END\n");
 		free(finl);
 		ft_bzero(finl, size);
 		finl = NULL;
@@ -70,25 +70,26 @@ int		ft_printf_2(va_list *arg, int *size, char *s)
 	x = 0;
 	ret = 0;
 	tmp = NULL;
-	printf("%zu\n", ft_strlen(s));
+	//printf("%zu\n", ft_strlen(s));
 	while (s[ret + x])
 	{
 		while (s[ret + x] && s[ret + x] != '%')
 			x++;
-		printf("S[RET] : _%s_ %d\n", &s[ret], ret);
+		//printf("S[RET] : _%s_ %d\n", &s[ret], ret);
 		*size = show_it_all(&s[ret], *size + x, 0, x);
 		if (s[ret + x] && data_init(&arg, &data, &s[ret + x]) == 0)
 		{
-			affichage(data);
+		//	affichage(data);
 			if (data.conv & STOP_D)
 			{
 				tmp = nbr_manager(&arg, &data);
-				printf("\nTMP : %s___, %d\n", tmp, data.s_ct[0]);
+				//printf("\nTMP : %s___, %d\n", tmp, data.s_ct[0]);
 			}
 			else
 			{
+			//	printf("CHR SEARCH\n");
 				tmp = chr_manager(&arg, &data);
-				printf("\nTMP CHR : %s\n", tmp);
+				//printf("\nTMP CHR : %s\n", tmp);
 			}
 			tmp = flag_manager(&data, tmp);
 			if (tmp)
@@ -100,7 +101,7 @@ int		ft_printf_2(va_list *arg, int *size, char *s)
 		ret += x;
 		x = 0;
 	}
-	printf("JAI FINI MES BETISES !!!!!!!\n");
+	//printf("\nJAI FINI MES BETISES !!!!!!!\n");
 	return (*size);
 }
 

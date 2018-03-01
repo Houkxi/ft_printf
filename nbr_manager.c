@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 18:24:19 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 16:59:39 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char		*nbr_manager(va_list **arg, t_info *data)
 	char *rendu;
 
 	rendu = NULL;
+	if (data->flags & HASH_J && (data->type != 'X' && data->type != 'x'))
+		data->flags &= data->flags - HASH_J;
 	if (data->type == 'd' || data->type == 'D' || data->type == 'i')
 	{
 		if (data->type == 'D' && !(data->conv & MINUS_L))
@@ -74,7 +76,7 @@ char		*nbr_manager(va_list **arg, t_info *data)
 		rendu = signed_nbrs(&arg, &data, 10);
 		if (data->s_ct[0] == -2)
 			data->flags |= PLUS_LL;
-		printf("%s\n", rendu);
+		//printf("%s\n", rendu);
 	}
 	else if (ft_occ_pos("uUxXoO", data->type) > -1)
 	{

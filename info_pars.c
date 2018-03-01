@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 17:37:55 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 18:13:31 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ unsigned char	flag_search(char *s, unsigned char sv, t_info ***data, int *xb)
 			x += rec_nbr_count((**data)->prec, 0, 10);
 		sv |= DOT_H;
 	}
-	printf("_%c_\n", s[x]);
+	//printf("_%c_\n", s[x]);
 	if (s[x] && s[x] == '*')
 	{
 		(**data)->s_ct[0]++;
-		printf("STAR ***%d***\n", (**data)->s_ct[0]);
+		//printf("STAR ***%d***\n", (**data)->s_ct[0]);
 		if (s[x - 1] == '.')
 		{
-			printf("PREC STAR %d\n", (**data)->s_ct[0]);
+			//printf("PREC STAR %d\n", (**data)->s_ct[0]);
 			(**data)->s_ct[2] = (**data)->s_ct[0];
 			(**data)->prec = -1;
 		}
@@ -121,9 +121,9 @@ CONDITION in case type is special, some flags are not wanted
 
 unsigned char	conv_check(unsigned char sv, t_info **data)
 {
-	if ((*data)->type && ((*data)->type == 's' || (*data)->type == 'S' ||
+	/*if ((*data)->type && ((*data)->type == 's' || (*data)->type == 'S' ||
 		(*data)->type == 'c' || (*data)->type == 'C'))
-		(*data)->flags &= 41;
+		(*data)->flags &= 41;*/
 	(*data)->flags & ZERO_Z && ((*data)->flags & DOT_H ||
 	(*data)->flags & MINUS_L || !((*data)->flags & MFIELD_HH)) ?
 	(*data)->flags &= (*data)->flags - ZERO_Z : (*data)->flags;
@@ -171,31 +171,33 @@ int				data_init(va_list **arg, t_info *data, char *s)
 	new_data(&data);
 	data->cmd_size = type_check(s, &data);
 	data->type = s[data->cmd_size];
-	ft_print_bits(data->flags, 8);
-	printf("\n");
-	printf("TEST FOR STARS : %d, %d\nCOUNT STARTS 0 : %d, 1 : %d, 2 : %d\n", data->mfield, data->prec, data->s_ct[0], data->s_ct[1], data->s_ct[2]);
+	//ft_print_bits(data->flags, 8);
+//	printf("\n");
+	//printf("TEST FOR STARS : %d, %d\nCOUNT STARTS 0 : %d, 1 : %d, 2 : %d\n", data->mfield, data->prec, data->s_ct[0], data->s_ct[1], data->s_ct[2]);
 	while (ct <= data->s_ct[0])
 	{
 		save = va_arg(**arg, int);
-		printf("SAVE : %d\n%d\n", save, ct);
+		//printf("SAVE : %d\n%d\n", save, ct);
 		if (ct == data->s_ct[1] && data->mfield == -1)
 		{
 			data->mfield = save;
-			data->flags |= DOT_H;
+			data->flags |= MFIELD_HH;
 		}
 		if (ct == data->s_ct[2] && data->prec == -1)
 		{
 			data->prec = save;
-			data->flags |= MFIELD_HH;
+			data->flags |= DOT_H;
 		}
 		ct++;
 	}
-	printf("TEST FOR STARS END : %d, %d\n", data->mfield, data->prec);
+	//printf("TEST FOR STARS END : %d, %d\n", data->mfield, data->prec);
+/*	ft_print_bits(data->flags, 8);
+	printf("\n");*/
 	if (data->flags & STOP_D)
 	{
-		printf("STOP THIS SHIT !!!\n");
-		ft_print_bits(data->flags, 8);
-		printf("\n");
+	//	printf("STOP THIS SHIT !!!\n");
+//		ft_print_bits(data->flags, 8);
+	//	printf("\n");
 		return (-1);
 	}
 	data->conv = conv_check(data->conv, &data);

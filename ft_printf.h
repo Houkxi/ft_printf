@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 18:46:47 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 16:06:20 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <wchar.h>
+#include <limits.h>
+#include <locale.h>
 
 enum {MINUS_L = 1, PLUS_LL = 2, HASH_J = 4, ZERO_Z = 8, DOT_H = 16,
 	MFIELD_HH = 32, SPACE = 64, STOP_D = 128, STOP = 255};
@@ -56,5 +58,10 @@ char				*ft_utoall(unsigned long long int n, int base, int size,
 char				*ft_strfill(char *s, char c, int len);
 char				*ft_strdecal(char *d, char *s, int decl);
 char				*ft_strcpy_dir(char *d, char *s, int dir, int start);
+
+/*
+		FOR TESTS
+*/
+void				nbr_cmp(void);
 
 #endif

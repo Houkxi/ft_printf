@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:52:59 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 16:53:19 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/01 14:12:43 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char		*ft_strdecal(char *d, char *s, int decl)
 	int		x;
 
 	x = 0;
+	if (s[0] == '\0')
+		return (d);
 	while (s[x])
 	{
 		d[decl] = s[x];
