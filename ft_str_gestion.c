@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:52:59 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/01 14:12:43 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/05 15:39:39 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char		*ft_strfill(char *s, char c, int len)
 	return (new);
 }
 
-char		*ft_strdecal(char *d, char *s, int decl)
+char		*ft_strdecal(char *d, char *s, int decl, int len)
 {
 	int		x;
 
 	x = 0;
 	if (s[0] == '\0')
 		return (d);
-	while (s[x])
+	while (s[x] && len--)
 	{
 		d[decl] = s[x];
 		x++;

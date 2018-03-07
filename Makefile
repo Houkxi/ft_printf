@@ -6,11 +6,11 @@
 #    By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/23 16:56:10 by mmanley           #+#    #+#              #
-#    Updated: 2018/03/01 18:25:04 by mmanley          ###   ########.fr        #
+#    Updated: 2018/03/07 14:16:06 by mmanley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libprintf.a
+NAME = libftprintf.a
 
 CC = gcc
 
@@ -28,6 +28,9 @@ SRCS =	chr_manager.c\
 		ft_str_gestion.c\
 		info_pars.c\
 		nbr_manager.c\
+		pars_check.c\
+		buff_renderer.c\
+		flags_chr.c\
 
 OBJS_NAME = $(SRCS:%.c=%.o)
 
@@ -50,7 +53,7 @@ $(OBJ_PATH)%.o: %.c
 	$(CC) $(FLAGS) -o $@ -c $< -I $(INC)
 
 run :
-	@gcc -o ft_printf main.c checks/nbr_check.c libprintf.a ~/libft/libft.a -I $(INC) && ./ft_printf
+	@gcc -o ft_printf main.c checks/nbr_check.c libftprintf.a ~/libft/libft.a -I $(INC) && ./ft_printf
 
 clean :
 	@rm -rf objs

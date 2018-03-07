@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/01 16:59:39 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/07 10:52:49 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,41 +56,28 @@ char		*unsigned_nbrs(va_list ***arg, t_info *data, int base)
 	return (save);
 }
 
-/*
-		ECRIRE CONDITION IF | BOUCLE WHILE FT_OCCURENCE
-							|
-							V
-*/
-
 char		*nbr_manager(va_list **arg, t_info *data)
 {
 	char *rendu;
 
 	rendu = NULL;
-	if (data->flags & HASH_J && (data->type != 'X' && data->type != 'x'))
-		data->flags &= data->flags - HASH_J;
 	if (data->type == 'd' || data->type == 'D' || data->type == 'i')
 	{
 		if (data->type == 'D' && !(data->conv & MINUS_L))
 			data->conv |= PLUS_LL;
 		rendu = signed_nbrs(&arg, &data, 10);
-		if (data->s_ct[0] == -2)
-			data->flags |= PLUS_LL;
-		//printf("%s\n", rendu);
+		/*if (data->s_ct[0] == -2)
+			data->flags |= PLUS_LL;*/
 	}
-	else if (ft_occ_pos("uUxXoO", data->type) > -1)
+	else if (ft_occ_pos("uUxXoOp", data->type) > -1)
 	{
-		if (data->flags & PLUS_LL)
-			data->flags &= data->flags - PLUS_LL;
-		if (data->flags & SPACE)
-			data->flags &= data->flags - SPACE;
-		if (data->type == 'X' || data->type == 'x')
+		if (data->type == 'X' || data->type == 'x' || data->type == 'p')
 			rendu = unsigned_nbrs(&arg, data, 16);
 		else if (data->type == 'o')
 			rendu = unsigned_nbrs(&arg, data, 8);
 		else
 			rendu = unsigned_nbrs(&arg, data, 10);
-		if (data->type == 'x')
+		if (data->type == 'x' || data->type == 'p')
 			ft_put_to_lower(rendu);
 	}
 	return (rendu);

@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:33:37 by mmanley           #+#    #+#             */
-/*   Updated: 2018/02/23 17:37:07 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/05 19:35:51 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int		signed_count(long long int nb, int i, int base)
 		nb *= -1;
 	}
 	if (nb >= base)
-		return (rec_nbr_count(nb / base, i + 1, base));
+		return (signed_count(nb / base, i + 1, base));
 	return (i);
 }
 
 static int		unsigned_signed_count(unsigned long long int nb, int i, int base)
 {
 	if (nb >= (unsigned long long int)base)
-		return (rec_nbr_count(nb / base, i + 1, base));
+		return (unsigned_signed_count(nb / base, i + 1, base));
 	return (i);
 }
 
