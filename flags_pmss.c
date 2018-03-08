@@ -6,13 +6,13 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:09:37 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:22:28 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		flag_sign(t_info *data, unsigned char sv, int ret)
+int			flag_sign(t_info *data, unsigned char sv, int ret)
 {
 	if (!(sv & PLUS_LL) && !(sv & SPACE) && !(sv & HASH_J))
 		return (0);
@@ -43,7 +43,7 @@ char		*flag_prec(int prec, char *s, int size)
 {
 	char	*new;
 
-	if ((new =(char*)malloc((prec + 1))) == NULL)
+	if ((new = (char*)malloc((prec + 1))) == NULL)
 		return (NULL);
 	new[prec] = '\0';
 	if (prec <= size)
@@ -69,7 +69,7 @@ char		*flag_hash(int size, char *s, t_info *data)
 		add = 2;
 	else
 		add = 1;
-	if ((new =(char*)malloc((size + add + 1))) == NULL)
+	if ((new = (char*)malloc((size + add + 1))) == NULL)
 		return (NULL);
 	new[size + add] = '\0';
 	if (data->type == 'x' || data->type == 'p')
@@ -83,16 +83,16 @@ char		*flag_hash(int size, char *s, t_info *data)
 	return (new);
 }
 
-static void		mfielding(int len, char c)
+static void	mfielding(int len, char c)
 {
 	char	*new;
 	int		size;
 
 	size = len;
 	if (len <= 0)
-		return;
-	if ((new =(char*)malloc((len + 1))) == NULL)
-		return;
+		return ;
+	if ((new = (char*)malloc((len + 1))) == NULL)
+		return ;
 	new[len] = '\0';
 	while (len--)
 		new[len] = c;
@@ -102,7 +102,7 @@ static void		mfielding(int len, char c)
 
 void		flag_mfield_nbr(int size, t_info *data, char *s, unsigned char sv)
 {
-	int mfield;
+	int		mfield;
 
 	mfield = data->mfield;
 	if (sv & MINUS_L)
@@ -119,8 +119,7 @@ void		flag_mfield_nbr(int size, t_info *data, char *s, unsigned char sv)
 	}
 	else
 	{
-		if (sv & PLUS_LL || sv & SPACE || sv & HASH_J)
-			size++;
+		sv & PLUS_LL || sv & SPACE || sv & HASH_J ? size++ : size;
 		if (data->type == 'x' || data->type == 'p' || data->type == 'X')
 			size++;
 		mfielding(mfield - size, ' ');

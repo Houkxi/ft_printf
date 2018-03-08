@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 10:52:49 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:19:30 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ char		*nbr_manager(va_list **arg, t_info *data)
 		if (data->type == 'D' && !(data->conv & MINUS_L))
 			data->conv |= PLUS_LL;
 		rendu = signed_nbrs(&arg, &data, 10);
-		/*if (data->s_ct[0] == -2)
-			data->flags |= PLUS_LL;*/
 	}
 	else if (ft_occ_pos("uUxXoOp", data->type) > -1)
 	{

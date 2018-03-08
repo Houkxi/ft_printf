@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:15:18 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:12:21 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_printf_2(va_list *arg, int *size, char *s)
 				//printf("STRING : _%s_\n", tmp);
 				//data.flags = pars_check(data), data.type, data.conv);
 			}
-			tmp = flag_manager(&data, tmp);
+			tmp = flag_manager(&data, tmp, ft_strlen(tmp));
 			x += data.cmd_size + 1;
 		}
 		else if (s[ret + x])

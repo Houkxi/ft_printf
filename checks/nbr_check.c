@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:04:06 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:49:06 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:01:42 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -579,20 +579,11 @@ void	nbr_cmp(void)
 		ft_printf("LET's SEe whEre You StoP oR stARt _%Z_\n");
 		printf("LET's SEe whEre You StoP oR stARt _%Z_\n");
 		fflush(stdout);
-		ft_printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n");
-		printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n");
-		fflush(stdout);
 		ft_printf("LET's SEe whEre You StoP oR stARt _%012 ZQ 154\n");
 		printf("LET's SEe whEre You StoP oR stARt _%012 ZQ 154\n");
 		fflush(stdout);
 		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     q12\n");
 		printf("LET's SEe whEre You StoP oR stARt _% 0         q12\n");
-		fflush(stdout);
-		ft_printf("LET's SEe whEre You StoP oR stARt _%5t_12\n");
-		printf("LET's SEe whEre You StoP oR stARt _%5t_12\n");
-		fflush(stdout);
-		ft_printf("LET's SEe whEre You StoP oR stARt _%5v_12\n");
-		printf("LET's SEe whEre You StoP oR stARt _%5v_12\n");
 		fflush(stdout);
 		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     _12\n");
 		printf("LET's SEe whEre You StoP oR stARt _% 0         _12\n");

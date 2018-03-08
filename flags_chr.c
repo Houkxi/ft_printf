@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:05:51 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 18:10:23 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:22:28 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char		*flag_prec_chr(int prec, char *s, int size)
 
 	if (prec > size)
 		prec = size;
-	if ((new =(char*)malloc((prec + 1))) == NULL)
+	if ((new = (char*)malloc((prec + 1))) == NULL)
 		return (NULL);
 	new[prec] = '\0';
 	ft_strncpy(new, s, prec);
@@ -26,16 +26,16 @@ char		*flag_prec_chr(int prec, char *s, int size)
 	return (new);
 }
 
-static void		mfielding(int len, char c)
+static void	mfielding(int len, char c)
 {
 	char	*new;
 	int		size;
 
 	size = len;
 	if (len <= 0)
-		return;
-	if ((new =(char*)malloc((len + 1))) == NULL)
-		return;
+		return ;
+	if ((new = (char*)malloc((len + 1))) == NULL)
+		return ;
 	new[len] = '\0';
 	while (len--)
 		new[len] = c;
@@ -45,7 +45,7 @@ static void		mfielding(int len, char c)
 
 void		flag_mfield_chr(int size, t_info *data, char *s, unsigned char sv)
 {
-	int mfield;
+	int		mfield;
 
 	mfield = data->mfield;
 	if (sv & MINUS_L)

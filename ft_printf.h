@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 18:12:40 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:12:30 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # ifndef T_U36
 #  define T_U36		long long;
+#  define T_U8		unsigned char;
 # endif
 
 # include <stdio.h>
@@ -49,9 +50,9 @@ void				new_data(t_info **data);
 char				*chr_manager(va_list **arg, t_info *data);
 char				*nbr_manager(va_list **arg, t_info *data);
 unsigned char		pars_check(t_info **data, char t, unsigned char sv);
-void				finl_pars(t_info **data, int size, int ch, unsigned char sv);
+void				fl_ps(t_info **data, int size, int ch, unsigned char sv);
 char				*flag_hash(int size, char *s, t_info *data);
-char				*flag_manager(t_info *data, char *s);
+char				*flag_manager(t_info *data, char *s, int size);
 void				flag_mfield_chr(int size, t_info *data, char *s, unsigned char sv);
 char				*flag_prec(int prec, char *s, int size);
 char				*flag_prec_chr(int prec, char *s, int size);

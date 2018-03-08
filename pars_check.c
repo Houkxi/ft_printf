@@ -6,13 +6,13 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:51:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:29:59 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:06:24 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned char	conv_check(unsigned char sv)
+static unsigned char	conv_check(unsigned char sv)
 {
 	if (sv & STOP_D)
 	{
@@ -34,7 +34,7 @@ unsigned char	conv_check(unsigned char sv)
 	return (0);
 }
 
-unsigned char	conv_search(unsigned char sv, t_info **data)
+static unsigned char	conv_search(unsigned char sv, t_info **data)
 {
 	if ((*data)->nbr_l % 2 != 0)
 		sv |= MINUS_L;
@@ -49,12 +49,12 @@ unsigned char	conv_search(unsigned char sv, t_info **data)
 	return (sv);
 }
 
-void		finl_pars(t_info **data, int size, int ch, unsigned char sv)
+void					fl_ps(t_info **data, int size, int ch, unsigned char sv)
 {
 	if (ch == 0)
 	{
 		(*data)->s_ct[0] == -2 ? sv |= PLUS_LL : sv;
-		if (sv &  MFIELD_HH && ((*data)->mfield <= size ||
+		if (sv & MFIELD_HH && ((*data)->mfield <= size ||
 			(*data)->mfield <= (*data)->prec))
 			sv &= sv - MFIELD_HH;
 		if (sv & DOT_H && (*data)->prec <= size &&
@@ -69,12 +69,12 @@ void		finl_pars(t_info **data, int size, int ch, unsigned char sv)
 		if (sv & MFIELD_HH && (*data)->mfield <= (*data)->prec)
 			sv &= sv - MFIELD_HH;
 		if (sv & DOT_H && (*data)->prec >= size)
-			sv &=  sv - DOT_H;
+			sv &= sv - DOT_H;
 	}
 	(*data)->flags = sv;
 }
 
-unsigned char		pars_check(t_info **data, char t, unsigned char sv)
+unsigned char			pars_check(t_info **data, char t, unsigned char sv)
 {
 	(*data)->conv = conv_search((*data)->conv, data);
 	if (ft_occ_pos("dDioOxXuUp", t) > -1)
@@ -83,11 +83,8 @@ unsigned char		pars_check(t_info **data, char t, unsigned char sv)
 			sv &= sv - ZERO_Z;
 		(sv & PLUS_LL || sv & HASH_J) && sv & SPACE ? sv &= sv - SPACE : sv;
 		sv & HASH_J && ft_occ_pos("xXoOp", t) == -1 ? sv &= sv - HASH_J : sv;
-		if ((*data)->type == 'p')
-		{
-			sv |= HASH_J;
-			(*data)->conv = STOP_D + MINUS_L;
-		}
+		(*data)->type == 'p' ? sv |= HASH_J : sv;
+		(*data)->type == 'p' ? (*data)->conv = STOP_D + MINUS_L : (*data)->conv;
 		if (ft_occ_pos("oOxXuU", t) > -1)
 		{
 			sv & PLUS_LL ? sv &= sv - PLUS_LL : sv;

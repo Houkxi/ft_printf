@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:52:59 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/05 15:39:39 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:21:13 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 char		*ft_strfill(char *s, char c, int len)
 {
 	char	*new;
-	int x;
+	int		x;
 
 	new = s;
 	x = 0;
-	while(len--)
+	while (len--)
 	{
 		s[x] = c;
 		x += 1;
@@ -65,5 +65,5 @@ char		*ft_strcpy_dir(char *d, char *s, int dir, int start)
 		end += dir;
 		x += dir;
 	}
-	return(d);
+	return (d);
 }

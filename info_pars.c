@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:44:36 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:18:45 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,23 +90,14 @@ static char				type_check(char *s, t_info **data)
 	type = "dDioOxXuUpcCsS %#*0+-.hjzlL$123456789q_";
 	while ((ret = ft_occ_pos(type, s[x])) > 13 && ++x)
 	{
-		/*s[x] && s[x] == 'l' ? (*data)->nbr_l += 1 : (*data)->nbr_l;
-		s[x] && s[x] == 'h' ? (*data)->nbr_h += 1 : (*data)->nbr_h;
-		s[x] && s[x] == 'j' ? (*data)->conv |= HASH_J : (*data)->conv;
-		s[x] && s[x] == 'z' ? (*data)->conv |= ZERO_Z : (*data)->conv;
-		s[x] && s[x] == '-' ? (*data)->flags |= MINUS_L : (*data)->flags;
-		s[x] && s[x] == '+' ? (*data)->flags |= PLUS_LL : (*data)->flags;
-		s[x] && s[x] == '#' ? (*data)->flags |= HASH_J : (*data)->flags;
-		s[x] && s[x] == ' ' ? (*data)->flags |= SPACE : (*data)->flags;*/
 		(*data)->flags = basc(s, (*data)->flags, &data, &x);
 		(*data)->flags = fcn(s, (*data)->flags, &data, &x);
 		if (s[x] && x != 0 && s[x] == '%')
 		{
 			ret = 15;
-			break;
+			break ;
 		}
 	}
-	//printf("RET : %d, X : %d, S : %c\n", ret, x, s[x]);
 	if (ret >= 0 && ret <= 9)
 		(*data)->conv |= STOP_D;
 	if (ret == -1 || ret == 15)
@@ -122,7 +113,8 @@ printf("VERIF CONV & FLAGS\n");
 ft_print_bits(data->flags, 8);
 printf("\n");
 ft_print_bits(data->conv, 8);
-printf("\n");*/
+printf("\n");
+*/
 
 int						data_init(va_list **arg, t_info *data, char *s)
 {
@@ -130,7 +122,6 @@ int						data_init(va_list **arg, t_info *data, char *s)
 	int					save;
 
 	ct = 1;
-	//printf("TEST FOR %% _%c_\n", s[0]);
 	new_data(&data);
 	data->cmd_size = type_check(s, &data);
 	while (ct <= data->s_ct[0])
@@ -149,10 +140,7 @@ int						data_init(va_list **arg, t_info *data, char *s)
 		ct++;
 	}
 	if (data->flags & STOP_D)
-	{
-		//printf("NOT GOOD\n");
 		return (-1);
-	}
 	data->flags = pars_check(&data, data->type, data->flags);
 	return (0);
 }
