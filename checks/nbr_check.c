@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:04:06 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 18:11:09 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:49:06 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,8 +338,11 @@ void	nbr_cmp(void)
 		ft_printf("P TEST _%#-25.20p_\n", s1);
 		printf("P TEST _%#-25.20p_\n", s1);
 		fflush(stdout);
-		ft_printf("_%#-.20p_\n", s1);
-		printf("_%#-.20p_\n", s1);
+		ft_printf("_%-.20p_\n", s1);
+		printf("_%-.20p_\n", s1);
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n", 154);
+		printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n", 154);
 		fflush(stdout);
 		ft_printf("PB _%#10p_\n", s1);
 		printf("PB _%#10p_\n", s1);
@@ -410,6 +413,7 @@ void	nbr_cmp(void)
 		ft_printf("%s\n", "S+E TH- T8UtH");
 		printf("%s\n", "S+E TH- T8UtH");
 		fflush(stdout);
+
 
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
@@ -534,6 +538,67 @@ void	nbr_cmp(void)
 		fflush(stdout);
 		ft_printf("_%#0*x_\n", 15, 5);
 		printf("_%#0*x_\n", 15, 5);
+		fflush(stdout);
+
+		printf("TITLE TO PARS THE RENDER\n");
+		fflush(stdout);
+
+		ft_printf("LET's SEe whEre You StoP oR stARt _%+10Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%+10Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%-10Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%-10Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%#10Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%#10Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _% 10Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _% 10Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%#10.0Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%#10.0Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%+10.*y_\n", 15);
+		printf("LET's SEe whEre You StoP oR stARt _%+10.*y_\n", 15);
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%-+015r_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%-+015r_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%#01R_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%#01R_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%- Q_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%- Q_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%q_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%q_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%Q_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%Q_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%Z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _%Z_\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n");
+		printf("LET's SEe whEre You StoP oR stARt _%012 po 154\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%012 ZQ 154\n");
+		printf("LET's SEe whEre You StoP oR stARt _%012 ZQ 154\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     q12\n");
+		printf("LET's SEe whEre You StoP oR stARt _% 0         q12\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%5t_12\n");
+		printf("LET's SEe whEre You StoP oR stARt _%5t_12\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%5v_12\n");
+		printf("LET's SEe whEre You StoP oR stARt _%5v_12\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     _12\n");
+		printf("LET's SEe whEre You StoP oR stARt _% 0         _12\n");
+		fflush(stdout);
+		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     z_\n");
+		printf("LET's SEe whEre You StoP oR stARt _% 0         z_\n");
 		fflush(stdout);
 
 		printf("TITLE TO PARS THE RENDER\n");

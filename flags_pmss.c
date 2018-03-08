@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 17:07:33 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:09:37 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		flag_sign(t_info *data, unsigned char sv, int ret)
 			ret += buff_rend("0X", 2, 0);
 		else if (data->type == 'o' || data->type == 'O')
 			ret += buff_rend("0", 1, 0);
+		else
+			ret = 0;
 	}
 	return (ret);
 }

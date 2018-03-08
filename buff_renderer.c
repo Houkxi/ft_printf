@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:29:33 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 16:57:25 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 11:29:48 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int			buff_rend(char *s, int len, int wrt)
 			return (0);
 		tmp = ft_strncpy(tmp, s, len);
  		rend = ft_strjoin_free(rend, tmp, 1);
-		//size += len;
-		//rend[size]= '\0';
 		free(tmp);
 	}
 	return (len);

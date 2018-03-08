@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 19:31:00 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 17:02:38 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:52:25 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,12 @@ char		*flag_manager(t_info *data, char *s)
 			size = 0;
 		}
 		finl_pars(&data, size, 0, data->flags);
-			/*printf("FLAGS ---> mfield = %d --- prec %d\n", data->mfield, data->prec);
+		/*	printf("FLAGS ---> mfield = %d --- prec %d\n", data->mfield, data->prec);
 			ft_print_bits(data->flags, 8);
 			printf("\n");*/
 		new = flag_4_nbrs(data, s, size, data->flags);
 	}
-	if ((ft_occ_pos("cCsS", data->type)) > -1)
+	else if ((ft_occ_pos("cCsS", data->type)) > -1)
 	{
 	/*	printf("CHRS : %s\n", s);
 		ft_print_bits(data->flags, 8);
@@ -137,6 +137,15 @@ char		*flag_manager(t_info *data, char *s)
 			/*printf("FLAGS ---> mfield = %d --- prec %d\n", data->mfield, data->prec);
 			ft_print_bits(data->flags, 8);
 			printf("\n");*/
+		new = flag_4_chrs(data, s, size);
+	}
+	else
+	{
+		//data->prec = 1;
+		data->flags & PLUS_LL ? data->flags &= data->flags - PLUS_LL : data->flags;
+		data->flags & SPACE ? data->flags &= data->flags - SPACE : data->flags;
+		data->flags & HASH_J ? data->flags &= data->flags - HASH_J : data->flags;
+		data->flags & DOT_H ? data->flags &= data->flags - DOT_H : data->flags;
 		new = flag_4_chrs(data, s, size);
 	}
 	//printf("INFORMATION : _%s_	%zu, %zu\n", new, ft_strlen(new), ft_strlen("-000000000007616"));

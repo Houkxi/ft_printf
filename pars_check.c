@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:51:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/07 16:26:05 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 13:29:59 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void		finl_pars(t_info **data, int size, int ch, unsigned char sv)
 			(*data)->s_ct[1] != -5)
 			sv &= sv - DOT_H;
 		sv & HASH_J && (*data)->s_ct[1] == -5 ? sv &= sv - HASH_J : sv;
-		if (sv & PLUS_LL && sv & SPACE)
+		if ((sv & PLUS_LL || sv & HASH_J) && sv & SPACE)
 			sv &= sv - SPACE;
 	}
 	else if (ch == 1)
