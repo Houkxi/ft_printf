@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:04:06 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:01:42 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 14:51:30 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	nbr_cmp(void)
 	fd = open("text.txt", O_RDONLY);
 	read(fd, r1, 50000);
 	r1[50000] = '\0';
+
 	setlocale(LC_ALL, "");
 	printf("TITLE TO PARS THE RENDER\n");
 	fflush(stdout);

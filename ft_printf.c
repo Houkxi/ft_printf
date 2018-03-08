@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:12:21 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 18:14:05 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		ft_printf_2(va_list *arg, int *size, char *s)
 					tmp = nbr_manager(&arg, &data);
 				else
 					tmp = chr_manager(&arg, &data);
+				printf("ECT CE QUE JE TE RECUPERE : _%s_\n", tmp);
 			}
 			else
 			{

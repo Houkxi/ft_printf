@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 19:31:00 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:17:12 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 18:27:55 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,12 @@ char		*flag_manager(t_info *data, char *s, int size)
 	}
 	else if ((ft_occ_pos("cCsS", data->type)) > -1)
 	{
+		data->s_ct[0] == -15 ? ft_bzero(s, size) : s;
+		printf("TEST UNI : %s\n", s);
 		fl_ps(&data, size, 1, data->flags);
 		new = flag_4_chrs(data, s, size);
+		printf("END UNI : %s\n", s);
+
 	}
 	else
 	{

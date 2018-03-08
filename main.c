@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:42:46 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:55:44 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/08 18:29:58 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,24 @@ ft_printf("2_%-15.10#+y_ %12d salut\n", 10);*/
 /*printf(s1, 10, 12, 45, 20, ex2, ex3, ex2, s5);
 ft_printf(s1, 10, 12, 45, 20, ex2, ex3, ex2, s5);
 */
+setlocale(LC_ALL, "");
 
+ft_printf("M -> : %C\n", 221);
+	printf("TRUE P : %C\n", 221);
+	fflush(stdout);
 
-
-	nbr_cmp();
+	ft_printf("M -> : %C\n", 3209);
+	printf("TRUE P : %C\n", 3209);
+	fflush(stdout);
+	ft_printf("M -> : %S\n", L"ĝØĔᄉ䆶");
+	printf("TRUE P : %S\n", L"ĝØĔᄉ䆶");
+	fflush(stdout);
+	ft_printf("__________M -> : %010.0S____________\n", L"员ᄉ䆶");
+	printf("TRUE P : %010.0S\n", L"员ᄉ䆶");
+	fflush(stdout);
+	ft_printf("__________M -> : %-010S____________\n", L"员ᄉ䆶");
+	printf("TRUE P : %-010S\n", L"员ᄉ䆶");
+	fflush(stdout);
+	//nbr_cmp();
 	return (0);
 }
