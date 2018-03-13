@@ -6,54 +6,57 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:19:30 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/13 11:37:02 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*signed_nbrs(va_list ***arg, t_info **data, int base)
+char		*signed_nbrs(va_list ***arg, t_info **data, int base, int sg)
 {
 	char *save;
 
 	save = NULL;
-	if ((*data)->conv & MINUS_L)
-		save = ft_itoall((long int)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv & PLUS_LL)
-		save = ft_itoall((long long int)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv & HASH_J)
-		save = ft_itoall((intmax_t)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv & ZERO_Z)
-		save = ft_itoall((size_t)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv & DOT_H)
-		save = ft_itoall((short int)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv & MFIELD_HH)
-		save = ft_itoall((char)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
-	else if ((*data)->conv == 128)
-		save = ft_itoall((int)(va_arg(***arg, intmax_t)), base, 0, &(*data)->s_ct[0]);
+	if ((*data)->flgs & L)
+		save = ft_itoall((long int)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	else if ((*data)->flgs & LL)
+		save = ft_itoall((long long int)(va_arg(***arg, intmax_t)), base, 0,
+		&sg);
+	else if ((*data)->flgs & J)
+		save = ft_itoall((intmax_t)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	else if ((*data)->flgs & Z)
+		save = ft_itoall((size_t)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	else if ((*data)->flgs & H)
+		save = ft_itoall((short int)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	else if ((*data)->flgs & HH)
+		save = ft_itoall((char)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	else if ((*data)->flgs)
+		save = ft_itoall((int)(va_arg(***arg, intmax_t)), base, 0, &sg);
+	(*data)->s_ct[0] = sg;
 	return (save);
 }
 
-char		*unsigned_nbrs(va_list ***arg, t_info *data, int base)
+char		*unsigned_nbrs(va_list ***arg, t_info *data, int b)
 {
-	char *save;
+	char *s;
 
-	save = NULL;
-	if (data->conv & MINUS_L)
-		save = ft_utoall((unsigned long int)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv & PLUS_LL)
-		save = ft_utoall((unsigned long long int)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv & HASH_J)
-		save = ft_utoall((uintmax_t)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv & ZERO_Z)
-		save = ft_utoall((size_t)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv & DOT_H)
-		save = ft_utoall((unsigned short int)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv & MFIELD_HH)
-		save = ft_utoall((unsigned char)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	else if (data->conv == 128)
-		save = ft_utoall((unsigned int)(va_arg(***arg, uintmax_t)), base, 0, 0);
-	return (save);
+	s = NULL;
+	if (data->flgs & L)
+		s = ft_utoall((unsigned long int)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	else if (data->flgs & LL)
+		s = ft_utoall((unsigned long long int)(va_arg(***arg, uintmax_t)), b, 0,
+		0);
+	else if (data->flgs & J)
+		s = ft_utoall((uintmax_t)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	else if (data->flgs & Z)
+		s = ft_utoall((size_t)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	else if (data->flgs & H)
+		s = ft_utoall((unsigned short int)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	else if (data->flgs & HH)
+		s = ft_utoall((unsigned char)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	else if (data->flgs)
+		s = ft_utoall((unsigned int)(va_arg(***arg, uintmax_t)), b, 0, 0);
+	return (s);
 }
 
 char		*nbr_manager(va_list **arg, t_info *data)
@@ -63,15 +66,17 @@ char		*nbr_manager(va_list **arg, t_info *data)
 	rendu = NULL;
 	if (data->type == 'd' || data->type == 'D' || data->type == 'i')
 	{
-		if (data->type == 'D' && !(data->conv & MINUS_L))
-			data->conv |= PLUS_LL;
-		rendu = signed_nbrs(&arg, &data, 10);
+		if (data->type == 'D' && !(data->flgs & L))
+			data->flgs |= LL;
+		rendu = signed_nbrs(&arg, &data, 10, 0);
 	}
 	else if (ft_occ_pos("uUxXoOp", data->type) > -1)
 	{
+		if ((data->type == 'U' || data->type == 'O') && !(data->flgs & L))
+			data->flgs |= LL;
 		if (data->type == 'X' || data->type == 'x' || data->type == 'p')
 			rendu = unsigned_nbrs(&arg, data, 16);
-		else if (data->type == 'o')
+		else if (data->type == 'o' || data->type == 'O')
 			rendu = unsigned_nbrs(&arg, data, 8);
 		else
 			rendu = unsigned_nbrs(&arg, data, 10);

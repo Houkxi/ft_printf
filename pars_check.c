@@ -6,99 +6,115 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:51:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:06:24 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:44:43 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned char	conv_check(unsigned char sv)
+static unsigned int	conv_check(unsigned int sv)
 {
-	if (sv & STOP_D)
+	if (sv & DEC)
 	{
-		if (sv & HASH_J)
-			return (sv = 132);
-		else if (((sv & PLUS_LL) || (sv & ZERO_Z)))
-			return (sv = 130);
-		else if (sv & MINUS_L)
-			return (sv = 129);
-		else if (sv & DOT_H)
-			return (sv = 144);
-		else if (sv & MFIELD_HH)
-			return (sv = 160);
+		if (sv & J)
+			return (sv &= 0xFFFF00FF + J);
+		else if ((sv & Z))
+			return (sv &= 0xFFFF00FF + Z);
+		else if ((sv & LL))
+			return (sv &= 0xFFFF00FF + LL);
+		else if (sv & L)
+			return (sv &= 0xFFFF00FF + L);
+		else if (sv & H)
+			return (sv &= 0xFFFF00FF + H);
+		else if (sv & HH)
+			return (sv &= 0xFFFF00FF + HH);
 		else
-			return (sv = 128);
+			return (sv &= 0xFFFF00FF);
 	}
-	else if (!(sv & STOP_D) && sv & MINUS_L)
-		return (sv = MINUS_L);
-	return (0);
+	else if (!(sv & DEC) && sv & L)
+		return (sv = (sv & 0xFFFF00FF) + L);
+	return (sv &= 0xFFFF00FF);
 }
 
-static unsigned char	conv_search(unsigned char sv, t_info **data)
+static unsigned int	conv_search(unsigned int sv, t_info **data)
 {
 	if ((*data)->nbr_l % 2 != 0)
-		sv |= MINUS_L;
+		sv |= L;
 	else if ((*data)->nbr_l % 2 == 0 && (*data)->nbr_l != 0)
-		sv |= PLUS_LL;
-	else if (!(sv & MINUS_L) && !(sv & PLUS_LL) && !(sv & ZERO_Z) &&
-	(*data)->nbr_h % 2 != 0 && !(sv & HASH_J))
-		sv |= DOT_H;
-	else if (!(sv & MINUS_L) && !(sv & PLUS_LL) && !(sv & ZERO_Z) &&
-	(*data)->nbr_h % 2 == 0 && (*data)->nbr_h != 0 && !(sv & HASH_J))
-		sv |= MFIELD_HH;
+		sv |= LL;
+	else if (!(sv & L) && !(sv & LL) && !(sv & Z) &&
+	(*data)->nbr_h % 2 != 0 && !(sv & J))
+		sv |= H;
+	else if (!(sv & L) && !(sv & LL) && !(sv & Z) &&
+	(*data)->nbr_h % 2 == 0 && (*data)->nbr_h != 0 && !(sv & J))
+		sv |= HH;
 	return (sv);
 }
 
-void					fl_ps(t_info **data, int size, int ch, unsigned char sv)
+void					fl_ps(t_info **data, int size, int ch, unsigned int sv)
 {
 	if (ch == 0)
 	{
-		(*data)->s_ct[0] == -2 ? sv |= PLUS_LL : sv;
-		if (sv & MFIELD_HH && ((*data)->mfield <= size ||
+		(*data)->s_ct[0] == -2 ? sv |= PLUS : sv;
+		if (sv & MFIELD && ((*data)->mfield <= size ||
 			(*data)->mfield <= (*data)->prec))
-			sv &= sv - MFIELD_HH;
-		if (sv & DOT_H && (*data)->prec <= size &&
+			sv &= sv - MFIELD;
+		if (sv & DOT && (*data)->prec <= size &&
 			(*data)->s_ct[1] != -5)
-			sv &= sv - DOT_H;
-		sv & HASH_J && (*data)->s_ct[1] == -5 ? sv &= sv - HASH_J : sv;
-		if ((sv & PLUS_LL || sv & HASH_J) && sv & SPACE)
+			sv &= sv - DOT;
+		sv & HASH && ((*data)->s_ct[1] == -5 || (*data)->s_ct[2] == -9)  && ft_occ_pos("oO", (*data)->type) == -1 ? sv &= sv - HASH : sv;
+		if ((sv & PLUS || sv & HASH) && sv & SPACE)
 			sv &= sv - SPACE;
 	}
 	else if (ch == 1)
 	{
-		if (sv & MFIELD_HH && (*data)->mfield <= (*data)->prec)
-			sv &= sv - MFIELD_HH;
-		if (sv & DOT_H && (*data)->prec >= size)
-			sv &= sv - DOT_H;
+		(*data)->s_ct[0] == -15 && sv & SPACE ? sv &= sv - SPACE : sv;
+		if (sv & MFIELD && (*data)->s_ct[0] == -15 &&
+		((*data)->mfield <= (*data)->prec || (*data)->mfield <= size))
+			sv &= sv - MFIELD;
+		if ((sv & DOT && (*data)->prec >= size) || (sv & DOT && (*data)->type == 'c'))
+			sv &= sv - DOT;
+		if (sv & MFIELD && sv & DOT && (*data)->mfield <= (*data)->prec)
+			sv &= sv - MFIELD;
 	}
-	(*data)->flags = sv;
+	(*data)->flgs = sv;
 }
 
-unsigned char			pars_check(t_info **data, char t, unsigned char sv)
+unsigned int			pars_check(t_info **data, char t, unsigned int sv)
 {
-	(*data)->conv = conv_search((*data)->conv, data);
+	/*printf("BYTES\n");
+	ft_print_bits_int(sv, 32);
+	printf("\n");*/
+	sv = conv_search(sv, data);
+	/*printf("NEW\n");
+	ft_print_bits_int(sv, 32);
+	printf("\n");*/
 	if (ft_occ_pos("dDioOxXuUp", t) > -1)
 	{
-		if ((sv & MINUS_L || sv & DOT_H || !(sv & MFIELD_HH)) && sv & ZERO_Z)
-			sv &= sv - ZERO_Z;
-		(sv & PLUS_LL || sv & HASH_J) && sv & SPACE ? sv &= sv - SPACE : sv;
-		sv & HASH_J && ft_occ_pos("xXoOp", t) == -1 ? sv &= sv - HASH_J : sv;
-		(*data)->type == 'p' ? sv |= HASH_J : sv;
-		(*data)->type == 'p' ? (*data)->conv = STOP_D + MINUS_L : (*data)->conv;
+		if ((sv & MINUS || sv & DOT || !(sv & MFIELD)) && sv & ZERO)
+			sv &= sv - ZERO;
+		(sv & PLUS || sv & HASH) && sv & SPACE ? sv &= sv - SPACE : sv;
+		sv & HASH && ft_occ_pos("xXoOp", t) == -1 ? sv &= sv - HASH : sv;
+		(*data)->type == 'p' ? sv |= HASH : sv;
+		(*data)->type == 'p' ? sv = (sv & 0xFFFF00FF) + L : sv;
 		if (ft_occ_pos("oOxXuU", t) > -1)
 		{
-			sv & PLUS_LL ? sv &= sv - PLUS_LL : sv;
+			sv & PLUS ? sv &= sv - PLUS : sv;
 			sv & SPACE ? sv &= sv - SPACE : sv;
 		}
-		(*data)->conv = conv_check((*data)->conv);
+		sv = conv_check(sv);
 	}
 	if (ft_occ_pos("cCsS", t) > -1)
 	{
-		if ((sv & MINUS_L || !(sv & MFIELD_HH)) && sv & ZERO_Z)
-			sv &= sv - ZERO_Z;
-		sv & HASH_J ? sv &= sv - HASH_J : sv;
-		sv & PLUS_LL ? sv &= sv - PLUS_LL : sv;
-		(*data)->conv = conv_check((*data)->conv);
+		if ((sv & MINUS || !(sv & MFIELD)) && sv & ZERO)
+			sv &= sv - ZERO;
+		sv & HASH ? sv &= sv - HASH : sv;
+		sv & PLUS ? sv &= sv - PLUS : sv;
+		sv & SPACE ? sv &= sv - SPACE : sv;
+		sv = conv_check(sv);
 	}
+	/*printf("AGAIN\n");
+	ft_print_bits_int(sv, 32);
+	printf("\n");*/
 	return (sv);
 }

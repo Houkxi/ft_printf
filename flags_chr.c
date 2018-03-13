@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:05:51 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:22:28 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/12 20:18:45 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,29 @@ static void	mfielding(int len, char c)
 	free(new);
 }
 
-void		flag_mfield_chr(int size, t_info *data, char *s, unsigned char sv)
+void		flag_mfield_chr(int size, t_info *data, char *s, unsigned int sv)
 {
 	int		mfield;
 
 	mfield = data->mfield;
-	if (sv & MINUS_L)
+	if (sv & MINUS)
 	{
-		mfield -= flag_sign(data, data->flags, 0);
+		mfield -= flag_sign(data, data->flgs, 0);
 		buff_rend(s, size, 0);
 		mfielding(mfield - size, ' ');
 	}
-	else if (sv & ZERO_Z)
+	else if (sv & ZERO)
 	{
-		size += flag_sign(data, data->flags, 0);
+		size += flag_sign(data, data->flgs, 0);
 		mfielding(mfield - size, '0');
 		buff_rend(s, size, 0);
 	}
 	else
 	{
-		if (sv & PLUS_LL || sv & SPACE)
+		if (sv & PLUS || sv & SPACE)
 			size++;
 		mfielding(mfield - size, ' ');
-		flag_sign(data, data->flags, 0);
+		flag_sign(data, data->flgs, 0);
 		buff_rend(s, size, 0);
 	}
 	free(s);

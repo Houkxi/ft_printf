@@ -6,17 +6,17 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:22:28 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/13 12:49:52 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			flag_sign(t_info *data, unsigned char sv, int ret)
+int			flag_sign(t_info *data, unsigned int sv, int ret)
 {
-	if (!(sv & PLUS_LL) && !(sv & SPACE) && !(sv & HASH_J))
+	if (!(sv & PLUS) && !(sv & SPACE) && !(sv & HASH))
 		return (0);
-	if (sv & PLUS_LL)
+	if (sv & PLUS)
 	{
 		if (data->s_ct[0] == -2)
 			ret += buff_rend("-", 1, 0);
@@ -25,7 +25,7 @@ int			flag_sign(t_info *data, unsigned char sv, int ret)
 	}
 	else if (sv & SPACE)
 		ret += buff_rend(" ", 1, 0);
-	else if (sv & HASH_J)
+	else if (sv & HASH)
 	{
 		if (data->type == 'x' || data->type == 'p')
 			ret += buff_rend("0x", 2, 0);
@@ -45,6 +45,7 @@ char		*flag_prec(int prec, char *s, int size)
 
 	if ((new = (char*)malloc((prec + 1))) == NULL)
 		return (NULL);
+	ft_bzero(new, prec);
 	new[prec] = '\0';
 	if (prec <= size)
 		return (ft_strcpy(new, s));
@@ -91,7 +92,7 @@ static void	mfielding(int len, char c)
 	size = len;
 	if (len <= 0)
 		return ;
-	if ((new = (char*)malloc((len + 1))) == NULL)
+	if (!(new = ft_strnew(len + 1)))
 		return ;
 	new[len] = '\0';
 	while (len--)
@@ -100,30 +101,30 @@ static void	mfielding(int len, char c)
 	free(new);
 }
 
-void		flag_mfield_nbr(int size, t_info *data, char *s, unsigned char sv)
+void		flag_mfield_nbr(int size, t_info *data, char *s, unsigned int sv)
 {
 	int		mfield;
 
 	mfield = data->mfield;
-	if (sv & MINUS_L)
+	if (sv & MINUS)
 	{
-		mfield -= flag_sign(data, data->flags, 0);
+		mfield -= flag_sign(data, data->flgs, 0);
 		buff_rend(s, size, 0);
 		mfielding(mfield - size, ' ');
 	}
-	else if (sv & ZERO_Z)
+	else if (sv & ZERO)
 	{
-		mfield -= flag_sign(data, data->flags, 0);
+		mfield -= flag_sign(data, data->flgs, 0);
 		mfielding(mfield - size, '0');
 		buff_rend(s, size, 0);
 	}
 	else
 	{
-		sv & PLUS_LL || sv & SPACE || sv & HASH_J ? size++ : size;
-		if (data->type == 'x' || data->type == 'p' || data->type == 'X')
-			size++;
+		sv & PLUS || sv & SPACE || sv & HASH ? mfield-- : mfield;
+		if ((ft_occ_pos("xXp", data->type)) > -1 && sv & HASH)
+			mfield--;
 		mfielding(mfield - size, ' ');
-		flag_sign(data, data->flags, 0);
+		flag_sign(data, data->flgs, 0);
 		buff_rend(s, size, 0);
 	}
 	free(s);

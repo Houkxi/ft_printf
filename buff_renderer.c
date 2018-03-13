@@ -6,37 +6,38 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:29:33 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:55:26 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:38:57 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int			buff_rend(char *s, int len, int wrt)
+int				buff_rend(char *s, int len, int fd)
 {
 	static int	size = 0;
 	static char	*rend = NULL;
 	char		*tmp;
+	int			mlen[2];
 
-	if (wrt == 1)
+	mlen[0] = size;
+	mlen[1] = len;
+	//printf("S : _%s_%d\n", s, len);
+	if (fd >= 1)
 	{
-		size = ft_strlen(rend);
-		write(1, rend, size);
+		write(fd, rend, size);
 		free(rend);
 		ft_bzero(rend, size);
 		rend = NULL;
-		size = 0;
 		return (size);
 	}
 	else
 	{
 		if (!rend)
-			rend = ft_memalloc(1);
-		if ((tmp = (char*)malloc(len + 1)) == NULL)
-			return (0);
-		tmp = ft_strncpy(tmp, s, len);
- 		rend = ft_strjoin_free(rend, tmp, 1);
-		free(tmp);
+			size = 0;
+		tmp = ft_memdup(s, len);
+		//printf("TMP : _%s_\n", tmp);
+		rend = ft_memjoin_free(rend, tmp, mlen, 3);
+		size += len;
 	}
 	return (len);
 }

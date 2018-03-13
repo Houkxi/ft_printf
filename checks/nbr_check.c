@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:04:06 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 14:51:30 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/13 18:49:18 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,16 @@ void	nbr_cmp(void)
 	r1[50000] = '\0';
 
 	setlocale(LC_ALL, "");
+	/*				BASICS*/
 	printf("TITLE TO PARS THE RENDER\n");
 	fflush(stdout);
 
+		ft_printf("%lld\n", -9223372036854775808);
+		printf("%lld\n", -9223372036854775808);
+		fflush(stdout);
+		ft_printf("%lld\n", -9223372036854775807);
+		printf("%lld\n", -9223372036854775807);
+		fflush(stdout);
 		ft_printf("%i\n", 0);
 		printf("%i\n", 0);
 		fflush(stdout);
@@ -115,6 +122,7 @@ void	nbr_cmp(void)
 		printf("_%+1.0d_\n", 0);
 		fflush(stdout);
 
+		/*				PRECISION*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -155,6 +163,7 @@ void	nbr_cmp(void)
 		printf("%+ .0d\n", -42);
 		fflush(stdout);
 
+		/*				MFIELD*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -189,6 +198,7 @@ void	nbr_cmp(void)
 		printf("{%-020d}\n", 42);
 		fflush(stdout);
 
+		/*				MFIELD && PRECISION*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -257,6 +267,7 @@ void	nbr_cmp(void)
 		printf("@moulitest: %5.d %5.0d\n", 0, 0);
 		fflush(stdout);
 
+		/*				0 EXCEPTION*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -327,6 +338,7 @@ void	nbr_cmp(void)
 		fflush(stdout);
 		ft_printf("3_% 1d_\n", 0);
 
+		/*				UNSIGNED*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -381,6 +393,15 @@ void	nbr_cmp(void)
 		ft_printf("_%12.6o_\n", 1258);
 		printf("_%#12.6o_\n", 1258);
 		fflush(stdout);
+		ft_printf("_%#3.2x_\n", 0);
+		printf("_%#3.2x_\n", 0);
+		fflush(stdout);
+		ft_printf("_%#4o_\n", 0);
+		printf("_%#4o_\n", 0);
+		fflush(stdout);
+		ft_printf("_%#.0o_\n", 0);
+		printf("_%#.0o_\n", 0);
+		fflush(stdout);
 
 		/*printf("\n----------\nFUNKY SHIT\n----------\n");
 		fflush(stdout);*/
@@ -415,7 +436,7 @@ void	nbr_cmp(void)
 		printf("%s\n", "S+E TH- T8UtH");
 		fflush(stdout);
 
-
+		/*				STRINGS STUFF*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -491,10 +512,11 @@ void	nbr_cmp(void)
 		ft_printf("_%-6.2s_\n", NULL);
 		printf("_%-6.2s_\n", NULL);
 		fflush(stdout);
-	/*	ft_printf("_%10c_\n", NULL);
+		ft_printf("_%10c_\n", NULL);
 		printf("_%10c_\n", NULL);
-		fflush(stdout);*/
+		fflush(stdout);
 
+		/*					SPES*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -541,6 +563,117 @@ void	nbr_cmp(void)
 		printf("_%#0*x_\n", 15, 5);
 		fflush(stdout);
 
+		/*					UNICODE*/
+		printf("TITLE TO PARS THE RENDER\n");
+		fflush(stdout);
+
+		ft_printf("UNiCode Try Out _%d_ %06d\n", 50, 52);
+		printf("UNiCode Try Out _%d_ %06d\n", 50, 52);
+		fflush(stdout);
+		ft_printf("UNiCode Try Out _%C_ %06C\n", 3209, 32080);
+		printf("UNiCode Try Out _%C_ %06C\n", 3209, 32080);
+		fflush(stdout);
+		ft_printf("UNiCode Try Out _%C_ %06C\n", 221, 200);
+		printf("UNiCode Try Out _%C_ %06C\n", 221, 200);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 41622, 38886);
+		printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 41622, 38886);
+		fflush(stdout);
+		ft_printf("BIG UNICODE _%+-*.*C_ %7C\n", 10, 5, 254, 41959);
+		printf("BIG UNICODE _%+-*.*C_ %7C\n", 10, 5, 254, 41959);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 41622, 0x01012F);
+		printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 41622, 0x01012F);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 0x011A9, 0x01012F);
+		printf("TWO ENORMOUS UNICODE _%.6C_ %-015C\n", 0x011A9, 0x01012F);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE Small prec_%.6C_ %-015C\n", 0x100259, 0x0110AF);
+		printf("TWO ENORMOUS UNICODE Small prec_%.6C_ %-015C\n", 0x100259, 0x0110AF);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE _%018#C_ %-015C\n", 0x031A9, 0x07A12F);
+		printf("TWO ENORMOUS UNICODE _%018#C_ %-015C\n", 0x031A9, 0x07A12F);
+		fflush(stdout);
+		ft_printf("TWO ENORMOUS UNICODE Small prec_%3.0C_ _%-015C_\n", 0x0110AF, 0x0112AF);
+		printf("TWO ENORMOUS UNICODE Small prec_%3.0C_ _%-015C_\n", 0x0110AF, 0x0112AF);
+		fflush(stdout);
+		ft_printf("_%S_\n", L"ĝØĔᄉ䆶");
+		printf("_%S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10S_\n", L"ĝØĔᄉ䆶");
+		printf("_%10S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%-10S_\n", L"ĝØĔᄉ䆶");
+		printf("_%-10S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("T_% 10S_\n", L"ĝØĔᄉ䆶");
+		printf("T_% 10S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%010S_\n", L"ĝØĔᄉ䆶");
+		printf("_%010S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%+10S_\n", L"ĝØĔᄉ䆶");
+		printf("_%+10S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%25S_\n", L"ĝØĔᄉ䆶");
+		printf("_%25S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%-25S_\n", L"ĝØĔᄉ䆶");
+		printf("_%-25S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_% 25S_\n", L"ĝØĔᄉ䆶");
+		printf("_% 25S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%025S_\n", L"ĝØĔᄉ䆶");
+		printf("_%025S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%+25S_\n", L"ĝØĔᄉ䆶");
+		printf("_%+25S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10.5S_\n", L"ĝØĔᄉ䆶");
+		printf("_%10.5S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%-10.6S_\n", L"ĝØĔᄉ䆶");
+		printf("_%-10.6S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_% 10.3S_\n", L"ĝØĔᄉ䆶");
+		printf("_% 10.3S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%010.7S_\n", L"ĝØĔᄉ䆶");
+		printf("_%010.7S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%+10.8S_\n", L"ĝØĔᄉ䆶");
+		printf("_%+10.8S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10.15S_\n", L"ĝØĔᄉ䆶");
+		printf("_%10.15S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%S_\n", L"ĝØĔᄉ䆶");
+		printf("_%S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10S_\n", L"긙ᄉᄉĔᄉ䆶");
+		printf("_%10S_\n", L"긙ᄉᄉĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%-10S_\n", L"ĝØĔᄉ䆶");
+		printf("_%-10S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10.5S_\n", L"엹ᄉ䆶");
+		printf("_%10.5S_\n", L"엹ᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%S_\n", L"ĝØĔᄉ䆶");
+		printf("_%S_\n", L"ĝØĔᄉ䆶");
+		fflush(stdout);
+		ft_printf("_%10S_\n", L"긙aᄉbᄉcĔᄉd䆶e");
+		printf("_%10S_\n", L"긙aᄉbᄉcĔᄉd䆶e");
+		fflush(stdout);
+		ft_printf("_%-10S_\n", L"ĝØĔᄉtestons䆶@");
+		printf("_%-10S_\n", L"ĝØĔᄉtestons䆶@");
+		fflush(stdout);
+		ft_printf("_%10.5S_\n", L"salut 엹ᄉ䆶 ca va 엡");
+		printf("_%10.5S_\n", L"salut 엹ᄉ䆶 ca va 엡");
+		fflush(stdout);
+
+		/*					UNDEFINED*/
 		printf("TITLE TO PARS THE RENDER\n");
 		fflush(stdout);
 
@@ -591,6 +724,9 @@ void	nbr_cmp(void)
 		fflush(stdout);
 		ft_printf("LET's SEe whEre You StoP oR stARt _%  0     z_\n");
 		printf("LET's SEe whEre You StoP oR stARt _% 0         z_\n");
+		fflush(stdout);
+		ft_printf("_%+012_\n");
+		printf("_%+012_\n");
 		fflush(stdout);
 
 		printf("TITLE TO PARS THE RENDER\n");

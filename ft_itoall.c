@@ -6,18 +6,22 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:33:37 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/05 19:35:51 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/12 13:57:53 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
+#include "ft_printf.h"
 
-/*
-		Not workimg with a long long overflow, look towards maxint_t.
-		Might be the answer.
-		Define if I want to work with a malloc or a static
-*/
+static char		*spec_case(void)
+{
+	char		*s;
+
+	if (!(s = (char*)malloc(sizeof(char) * 20)))
+		return (NULL);
+	s[19] = '\0';
+	return (ft_strcpy(s, "9223372036854775808"));
+}
 
 static int		signed_count(long long int nb, int i, int base)
 {
@@ -32,14 +36,14 @@ static int		signed_count(long long int nb, int i, int base)
 	return (i);
 }
 
-static int		unsigned_signed_count(unsigned long long int nb, int i, int base)
+static int		unsigned_signed_count(unsigned long long int nb, int i, int b)
 {
-	if (nb >= (unsigned long long int)base)
-		return (unsigned_signed_count(nb / base, i + 1, base));
+	if (nb >= (unsigned long long int)b)
+		return (unsigned_signed_count(nb / b, i + 1, b));
 	return (i);
 }
 
-char			*ft_utoall(unsigned long long int n, int base, int size, int sign)
+char			*ft_utoall(unsigned long long int n, int base, int sz, int sg)
 {
 	char		*str;
 	static char	us[49];
@@ -49,13 +53,13 @@ char			*ft_utoall(unsigned long long int n, int base, int size, int sign)
 	if (base < 2 || base > 16)
 		return (NULL);
 	str = "0123456789ABCDEF";
-	size = unsigned_signed_count(n, 0, base) + 1;
-	ft_bzero(us, size + 1);
-	us[size] = '\0';
-	while (size-- > sign)
+	sz = unsigned_signed_count(n, 0, base) + 1;
+	ft_bzero(us, sz + 1);
+	us[sz] = '\0';
+	while (sz-- > sg)
 	{
 		value = n % base;
-		us[size] = str[value];
+		us[sz] = str[value];
 		n /= base;
 	}
 	tmp = &us[0];
@@ -65,8 +69,7 @@ char			*ft_utoall(unsigned long long int n, int base, int size, int sign)
 char			*ft_itoall(long long int n, int base, int size, int *sign)
 {
 	char		*str;
-	static char	s[49];
-	char		*tmp;
+	char		*s;
 	int			value;
 
 	if (base < 2 || base > 16)
@@ -77,8 +80,11 @@ char			*ft_itoall(long long int n, int base, int size, int *sign)
 		*sign = -2;
 		n *= -1;
 	}
+	if (n == -9223372036854775807 - 1)
+		return (spec_case());
 	size = signed_count(n, 0, base) + 1;
-	ft_bzero(s, size + 1);
+	if (!(s = ft_strnew(size)))
+		return (NULL);
 	s[size] = '\0';
 	while (size-- > 0)
 	{
@@ -86,6 +92,5 @@ char			*ft_itoall(long long int n, int base, int size, int *sign)
 		s[size] = str[value];
 		n /= base;
 	}
-	tmp = &s[0];
-	return (tmp);
+	return (s);
 }

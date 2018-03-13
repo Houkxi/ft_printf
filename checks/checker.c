@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 15:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/08 13:17:02 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/12 12:51:31 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		main(int argv, char **argc)
 {
 	char	*line1 = NULL, *line2 = NULL;
 	int		ret = 0, ret1 = 0, ret2 = 0, fd1, stret = 50, sv = 0, i = 0, szret = 0;
-	char	*titles[15] = {"BASICS", "PRECISION", "MFIELD", "MFIELD && PRECISION",
+	char	*titles[20] = {"BASICS", "PRECISION", "MFIELD", "MFIELD && PRECISION",
 						"THE 0 EXCEPTION", "UNSIGNED", "FUNKY SHIT", "STRING STUFF",
-						"SPES", "BONUS", "UNDEFINED", "END"};
+						"SPES", "BONUS", "UNICODE", "UNDEFINED", "END"};
 
 	if (argv == 1)
 	{
