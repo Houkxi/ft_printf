@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 19:31:16 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 14:51:02 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,30 @@ static	unsigned int	basc(char *s, unsigned int sv, t_info ***data, int *xb)
 	return (sv);
 }
 
-static unsigned int	fcn(char *s, unsigned int sv, t_info ***data, int *xb)
+static unsigned int		fcn(char *s, unsigned int sv, t_info ***data, int *x)
 {
-	int				x;
-
-	x = *xb;
-	s[x] && s[x] == '0' && (s[x - 1] <= '0' || s[x - 1] > '9')
+	s[*x] && s[*x] == '0' && (s[*x - 1] <= '0' || s[*x - 1] > '9')
 	? sv |= ZERO : sv;
-	if (s[x] && s[x + 1] && s[x] == '.')
+	if (s[*x] && s[*x + 1] && s[*x] == '.')
 	{
-		(**data)->prec = ft_atoi(&s[x + 1]);
-		x++;
-		if (ft_isdigit(s[x]) == 1)
-			x += rec_nbr_count((**data)->prec, 0, 10);
+		(**data)->prec = ft_atoi(&s[*x + 1]);
+		*x += 1;
+		if (ft_isdigit(s[*x]) == 1)
+			*x += rec_nbr_count((**data)->prec, 0, 10);
+		while (s[*x] && s[*x] == '0')
+			*x += 1;
 		sv |= DOT;
+		s[*x] && s[*x + 1] && (s[*x] >= '0' && s[*x] <= '9') ? *x += 1 : *x;
 	}
-	if (s[x] && s[x] == '*')
-		star_spe(s, &data, x);
-	if (s[x] && s[x] > '0' && s[x] <= '9' && (s[x - 1] != '.' &&
-	(s[x - 1] <= '0' || s[x - 1] > '9')))
+	if (s[*x] && s[*x] == '*')
+		star_spe(s, &data, *x);
+	if (s[*x] && s[*x] > '0' && s[*x] <= '9' && (s[*x - 1] != '.' &&
+	(s[*x - 1] <= '0' || s[*x - 1] > '9')))
 	{
-		(**data)->mfield = ft_atoi(&s[x]);
-		x += rec_nbr_count((**data)->mfield, 0, 10);
+		(**data)->mfield = ft_atoi(&s[*x]);
+		*x += rec_nbr_count((**data)->mfield, 0, 10);
 		sv |= MFIELD;
 	}
-	*xb = x;
 	return (sv);
 }
 
@@ -76,10 +75,10 @@ static char				type_check(char *s, t_info **data)
 
 	x = 0;
 	type = "dDioOxXuUpcCsS %#*0+-.hjzlL$123456789q_";
-	while ((ret = ft_occ_pos(type, s[x])) > 13 && ++x)
+	while (s[x] && (ret = ft_occ_pos(type, s[x])) > 13 && ++x)
 	{
-		(*data)->flgs = basc(s, (*data)->flgs, &data, &x);
 		(*data)->flgs = fcn(s, (*data)->flgs, &data, &x);
+		(*data)->flgs = basc(s, (*data)->flgs, &data, &x);
 		if (s[x] && x != 0 && s[x] == '%')
 		{
 			ret = 15;
@@ -88,38 +87,10 @@ static char				type_check(char *s, t_info **data)
 	}
 	if (ret >= 0 && ret <= 9)
 		(*data)->flgs |= DEC;
-	if (ret == -1 || ret == 15)
-		(*data)->flgs |= STOP;
 	(*data)->type = s[x];
+	if (ret == -1 || ret > 13)
+		(*data)->flgs |= STOP;
 	return (x);
-}
-
-void					wildcard_calc(va_list ***arg, t_info **data, int ct)
-{
-	int					save;
-	unsigned int 		sv;
-
-	sv = (*data)->flgs;
-	while (ct <= (*data)->s_ct[0])
-	{
-		save = va_arg(***arg, int);
-		if (ct == (*data)->s_ct[1] && (*data)->mfield == -1)
-		{
-			(*data)->mfield = save;
-			sv |= MFIELD;
-			save < 0 && sv & MFIELD ? sv |= MINUS : sv;
-			save < 0 ? (*data)->mfield *= -1 : (*data)->mfield;
-		}
-		if (ct == (*data)->s_ct[2] && (*data)->prec == -1)
-		{
-			(*data)->prec = save;
-			(*data)->flgs |= DOT;
-			save < 0 && sv & DOT ? sv &= sv - DOT : sv;
-			save < 0 ? (*data)->prec = 0 : (*data)->prec;
-		}
-		ct++;
-	}
-	(*data)->flgs = sv;
 }
 
 int						data_init(va_list **arg, t_info *data, char *s)
@@ -130,28 +101,8 @@ int						data_init(va_list **arg, t_info *data, char *s)
 	new_data(&data);
 	data->cmd_size = type_check(s, &data);
 	wildcard_calc(&arg, &data, 1);
-	/*while (ct <= data->s_ct[0])
-	{
-		save = va_arg(**arg, int);
-		save < 0 ? save = 0 : save;
-		if (ct == data->s_ct[1] && data->mfield == -1)
-		{
-			data->mfield = save;
-			data->flgs |= MFIELD;
-		}
-		if (ct == data->s_ct[2] && data->prec == -1)
-		{
-			data->prec = save;
-			data->flgs |= DOT;
-		}
-		ct++;
-	}*/
 	if (data->flgs & STOP)
 		return (-1);
 	data->flgs = pars_check(&data, data->type, data->flgs);
-	/*printf("%c\n", data->type);
-	printf("BYTES --> %d\n", data->flgs);
-	ft_print_bits_int(data->flgs, 32);
-	printf("\n");*/
 	return (0);
 }

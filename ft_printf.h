@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 18:19:27 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 14:56:11 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <wchar.h>
-#include <limits.h>
-#include <locale.h>
-#include <fcntl.h>
+# include <limits.h>
+# include <locale.h>
+# include <fcntl.h>
 
 enum {MINUS = 1, PLUS = 2, HASH = 4, ZERO = 8, DOT = 16,
 	MFIELD = 32, SPACE = 64, DEC = 128, L = 256, LL = 512, J = 1024, Z = 2048,
@@ -45,7 +45,7 @@ char				*nbr_manager(va_list **arg, t_info *data);
 unsigned int		pars_check(t_info **data, char t, unsigned int sv);
 void				fl_ps(t_info **data, int size, int ch, unsigned int sv);
 char				*flag_hash(int size, char *s, t_info *data);
-char				*flag_manager(t_info *data, char *s, int size);
+void				flag_manager(t_info *data, char *s, int size);
 void				flag_mfield_chr(int size, t_info *data, char *s,
 	unsigned int sv);
 char				*flag_prec(int prec, char *s, int size);
@@ -60,6 +60,8 @@ char				*ft_strfill(char *s, char c, int len);
 char				*ft_strdecal(char *d, char *s, int decl, int len);
 char				*ft_strcpy_dir(char *d, char *s, int dir, int start);
 void				nbr_cmp(void);
-char				*uni_conv(wchar_t *w, t_info *data, int spe);
+char				*uni_conv(wchar_t *w, t_info *data, int spe, int y);
+int					uni_size(wchar_t w);
+void				wildcard_calc(va_list ***arg, t_info **data, int ct);
 
 #endif

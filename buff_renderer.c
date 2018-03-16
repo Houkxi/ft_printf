@@ -6,11 +6,23 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 10:29:33 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 19:38:57 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 16:48:44 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+static int		error_case(char *s, int *size)
+{
+	if (s)
+	{
+		//free(s);
+		ft_bzero(s, *size);
+		s = NULL;
+		*size = 0;
+	}
+	return (-1);
+}
 
 int				buff_rend(char *s, int len, int fd)
 {
@@ -21,8 +33,9 @@ int				buff_rend(char *s, int len, int fd)
 
 	mlen[0] = size;
 	mlen[1] = len;
-	//printf("S : _%s_%d\n", s, len);
-	if (fd >= 1)
+	if (fd == -1)
+		return (error_case(rend, &size));
+	else if (fd >= 1)
 	{
 		write(fd, rend, size);
 		free(rend);
@@ -35,7 +48,6 @@ int				buff_rend(char *s, int len, int fd)
 		if (!rend)
 			size = 0;
 		tmp = ft_memdup(s, len);
-		//printf("TMP : _%s_\n", tmp);
 		rend = ft_memjoin_free(rend, tmp, mlen, 3);
 		size += len;
 	}

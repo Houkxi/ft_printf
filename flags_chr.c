@@ -6,15 +6,15 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:05:51 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/12 20:18:45 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 13:27:15 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char		*flag_prec_chr(int prec, char *s, int size)
+char				*flag_prec_chr(int prec, char *s, int size)
 {
-	char	*new;
+	char			*new;
 
 	if (prec > size)
 		prec = size;
@@ -26,47 +26,44 @@ char		*flag_prec_chr(int prec, char *s, int size)
 	return (new);
 }
 
-static void	mfielding(int len, char c)
+void				wildcard_calc(va_list ***arg, t_info **data, int ct)
 {
-	char	*new;
-	int		size;
+	int				save;
+	unsigned int	sv;
 
-	size = len;
-	if (len <= 0)
-		return ;
-	if ((new = (char*)malloc((len + 1))) == NULL)
-		return ;
-	new[len] = '\0';
-	while (len--)
-		new[len] = c;
-	buff_rend(new, size, 0);
-	free(new);
+	sv = (*data)->flgs;
+	while (ct <= (*data)->s_ct[0])
+	{
+		save = va_arg(***arg, int);
+		if (ct == (*data)->s_ct[1] && (*data)->mfield == -1)
+		{
+			(*data)->mfield = save;
+			sv |= MFIELD;
+			save < 0 && sv & MFIELD ? sv |= MINUS : sv;
+			save < 0 ? (*data)->mfield *= -1 : (*data)->mfield;
+		}
+		if (ct == (*data)->s_ct[2] && (*data)->prec == -1)
+		{
+			(*data)->prec = save;
+			(*data)->flgs |= DOT;
+			save < 0 && sv & DOT ? sv &= sv - DOT : sv;
+			save < 0 ? (*data)->prec = 0 : (*data)->prec;
+		}
+		ct++;
+	}
+	(*data)->flgs = sv;
 }
 
-void		flag_mfield_chr(int size, t_info *data, char *s, unsigned int sv)
+void				new_data(t_info **data)
 {
-	int		mfield;
-
-	mfield = data->mfield;
-	if (sv & MINUS)
-	{
-		mfield -= flag_sign(data, data->flgs, 0);
-		buff_rend(s, size, 0);
-		mfielding(mfield - size, ' ');
-	}
-	else if (sv & ZERO)
-	{
-		size += flag_sign(data, data->flgs, 0);
-		mfielding(mfield - size, '0');
-		buff_rend(s, size, 0);
-	}
-	else
-	{
-		if (sv & PLUS || sv & SPACE)
-			size++;
-		mfielding(mfield - size, ' ');
-		flag_sign(data, data->flgs, 0);
-		buff_rend(s, size, 0);
-	}
-	free(s);
+	(*data)->nbr_h = 0;
+	(*data)->nbr_l = 0;
+	(*data)->prec = 0;
+	(*data)->mfield = 0;
+	(*data)->flgs = 0;
+	(*data)->cmd_size = 0;
+	(*data)->type = 0;
+	(*data)->s_ct[0] = 0;
+	(*data)->s_ct[1] = 0;
+	(*data)->s_ct[2] = 0;
 }

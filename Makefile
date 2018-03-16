@@ -6,7 +6,7 @@
 #    By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/23 16:56:10 by mmanley           #+#    #+#              #
-#    Updated: 2018/03/13 13:19:32 by mmanley          ###   ########.fr        #
+#    Updated: 2018/03/16 12:55:18 by mmanley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SRCS =	chr_manager.c\
 		flags_pmss.c\
 		ft_itoall.c\
 		ft_printf.c\
-		ft_str_gestion.c\
 		info_pars.c\
 		nbr_manager.c\
 		pars_check.c\

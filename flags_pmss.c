@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 12:49:52 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/15 18:22:20 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,4 @@ void		flag_mfield_nbr(int size, t_info *data, char *s, unsigned int sv)
 		flag_sign(data, data->flgs, 0);
 		buff_rend(s, size, 0);
 	}
-	free(s);
 }

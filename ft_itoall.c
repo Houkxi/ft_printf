@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/13 15:33:37 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/12 13:57:53 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 12:46:05 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static int		unsigned_signed_count(unsigned long long int nb, int i, int b)
 char			*ft_utoall(unsigned long long int n, int base, int sz, int sg)
 {
 	char		*str;
-	static char	us[49];
-	char		*tmp;
+	char		*us;
 	int			value;
 
 	if (base < 2 || base > 16)
 		return (NULL);
 	str = "0123456789ABCDEF";
 	sz = unsigned_signed_count(n, 0, base) + 1;
-	ft_bzero(us, sz + 1);
+	if (!(us = ft_strnew(sz)))
+		return (NULL);
 	us[sz] = '\0';
 	while (sz-- > sg)
 	{
@@ -62,8 +62,7 @@ char			*ft_utoall(unsigned long long int n, int base, int sz, int sg)
 		us[sz] = str[value];
 		n /= base;
 	}
-	tmp = &us[0];
-	return (tmp);
+	return (us);
 }
 
 char			*ft_itoall(long long int n, int base, int size, int *sign)

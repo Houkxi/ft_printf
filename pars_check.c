@@ -6,13 +6,13 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:51:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 19:44:43 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/16 12:44:53 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int	conv_check(unsigned int sv)
+static unsigned int		conv_check(unsigned int sv)
 {
 	if (sv & DEC)
 	{
@@ -36,7 +36,7 @@ static unsigned int	conv_check(unsigned int sv)
 	return (sv &= 0xFFFF00FF);
 }
 
-static unsigned int	conv_search(unsigned int sv, t_info **data)
+static unsigned int		conv_search(unsigned int sv, t_info **data)
 {
 	if ((*data)->nbr_l % 2 != 0)
 		sv |= L;
@@ -62,9 +62,9 @@ void					fl_ps(t_info **data, int size, int ch, unsigned int sv)
 		if (sv & DOT && (*data)->prec <= size &&
 			(*data)->s_ct[1] != -5)
 			sv &= sv - DOT;
-		sv & HASH && ((*data)->s_ct[1] == -5 || (*data)->s_ct[2] == -9)  && ft_occ_pos("oO", (*data)->type) == -1 ? sv &= sv - HASH : sv;
-		if ((sv & PLUS || sv & HASH) && sv & SPACE)
-			sv &= sv - SPACE;
+		sv & HASH && ((*data)->s_ct[1] == -5 || (*data)->s_ct[2] == -9) &&
+		ft_occ_pos("oOp", (*data)->type) == -1 ? sv &= sv - HASH : sv;
+		(sv & PLUS || sv & HASH) && sv & SPACE ? sv &= sv - SPACE : sv;
 	}
 	else if (ch == 1)
 	{
@@ -72,8 +72,8 @@ void					fl_ps(t_info **data, int size, int ch, unsigned int sv)
 		if (sv & MFIELD && (*data)->s_ct[0] == -15 &&
 		((*data)->mfield <= (*data)->prec || (*data)->mfield <= size))
 			sv &= sv - MFIELD;
-		if ((sv & DOT && (*data)->prec >= size) || (sv & DOT && (*data)->type == 'c'))
-			sv &= sv - DOT;
+		(sv & DOT && (*data)->prec >= size) ||
+		(sv & DOT && (*data)->type == 'c') ? sv &= sv - DOT : sv;
 		if (sv & MFIELD && sv & DOT && (*data)->mfield <= (*data)->prec)
 			sv &= sv - MFIELD;
 	}
@@ -82,13 +82,7 @@ void					fl_ps(t_info **data, int size, int ch, unsigned int sv)
 
 unsigned int			pars_check(t_info **data, char t, unsigned int sv)
 {
-	/*printf("BYTES\n");
-	ft_print_bits_int(sv, 32);
-	printf("\n");*/
 	sv = conv_search(sv, data);
-	/*printf("NEW\n");
-	ft_print_bits_int(sv, 32);
-	printf("\n");*/
 	if (ft_occ_pos("dDioOxXuUp", t) > -1)
 	{
 		if ((sv & MINUS || sv & DOT || !(sv & MFIELD)) && sv & ZERO)
@@ -97,7 +91,7 @@ unsigned int			pars_check(t_info **data, char t, unsigned int sv)
 		sv & HASH && ft_occ_pos("xXoOp", t) == -1 ? sv &= sv - HASH : sv;
 		(*data)->type == 'p' ? sv |= HASH : sv;
 		(*data)->type == 'p' ? sv = (sv & 0xFFFF00FF) + L : sv;
-		if (ft_occ_pos("oOxXuU", t) > -1)
+		if (ft_occ_pos("oOxXuUp", t) > -1)
 		{
 			sv & PLUS ? sv &= sv - PLUS : sv;
 			sv & SPACE ? sv &= sv - SPACE : sv;
@@ -106,15 +100,11 @@ unsigned int			pars_check(t_info **data, char t, unsigned int sv)
 	}
 	if (ft_occ_pos("cCsS", t) > -1)
 	{
-		if ((sv & MINUS || !(sv & MFIELD)) && sv & ZERO)
-			sv &= sv - ZERO;
+		(sv & MINUS || !(sv & MFIELD)) && sv & ZERO ? sv &= sv - ZERO : sv;
 		sv & HASH ? sv &= sv - HASH : sv;
 		sv & PLUS ? sv &= sv - PLUS : sv;
 		sv & SPACE ? sv &= sv - SPACE : sv;
 		sv = conv_check(sv);
 	}
-	/*printf("AGAIN\n");
-	ft_print_bits_int(sv, 32);
-	printf("\n");*/
 	return (sv);
 }
