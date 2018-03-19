@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 13:43:16 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/13 11:37:02 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 19:15:37 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ char		*nbr_manager(va_list **arg, t_info *data)
 		if (data->type == 'x' || data->type == 'p')
 			ft_put_to_lower(rendu);
 	}
+	else
+		rendu = bonus_part(&arg, &data);
 	return (rendu);
 }

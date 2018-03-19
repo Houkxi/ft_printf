@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 14:51:02 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 18:13:57 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,21 @@ static char				type_check(char *s, t_info **data)
 	char				*type;
 
 	x = 0;
-	type = "dDioOxXuUpcCsS %#*0+-.hjzlL$123456789q_";
-	while (s[x] && (ret = ft_occ_pos(type, s[x])) > 13 && ++x)
+	type = "dDioOxXuUbpcCsSt %#*0+-.hjzlL$123456789q_";
+	while (s[x] && (ret = ft_occ_pos(type, s[x])) > 15 && ++x)
 	{
 		(*data)->flgs = fcn(s, (*data)->flgs, &data, &x);
 		(*data)->flgs = basc(s, (*data)->flgs, &data, &x);
 		if (s[x] && x != 0 && s[x] == '%')
 		{
-			ret = 15;
+			ret = 17;
 			break ;
 		}
 	}
-	if (ret >= 0 && ret <= 9)
+	if (ret >= 0 && ret <= 10)
 		(*data)->flgs |= DEC;
 	(*data)->type = s[x];
-	if (ret == -1 || ret > 13)
+	if (ret == -1 || ret > 15)
 		(*data)->flgs |= STOP;
 	return (x);
 }

@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 19:05:06 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:30:28 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int				ft_printf(char *s, ...)
 	char		*tmp;
 
 	tmp = NULL;
-
 	x = 0;
 	ret = 0;
 	if (!s || s[0] == '\0')
@@ -98,7 +97,7 @@ int				ft_printf(char *s, ...)
 			x++;
 		buff_rend(&s[ret], x, 0);
 		if (s[ret + x] && !(ft_printf_2(&arg, &tmp, &s[ret + x], &x)))
-			return (buff_rend(NULL, 0, -1));
+			return (-1);
 		ret += x;
 		x = 0;
 	}

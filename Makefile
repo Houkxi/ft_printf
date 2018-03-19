@@ -6,7 +6,7 @@
 #    By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/23 16:56:10 by mmanley           #+#    #+#              #
-#    Updated: 2018/03/16 12:55:18 by mmanley          ###   ########.fr        #
+#    Updated: 2018/03/19 19:02:32 by mmanley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS =	chr_manager.c\
 		buff_renderer.c\
 		flags_chr.c\
 		wchar_conv.c\
+		bonus_part.c\
+		bonus_binary.c\
 
 OBJS_NAME = $(SRCS:%.c=%.o)
 

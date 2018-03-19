@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 13:13:33 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 19:01:30 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 12:20:27 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,8 @@ static char		*uni_trans(wchar_t w, int size)
 		tmp[0] = (w >> 6) + 0xC0;
 		tmp[1] = (w & 0x3F) + 0x80;
 	}
-	else if (w > 0x7FF && w <= 0xFFFF && tmp)
-	{
-		if (w >= 0xD800 && w <= 0xDFFF)
-			return (NULL);
-		tmp[0] = (w >> 12) + 0xE0;
-		tmp[1] = ((w >> 6) & 0x3F) + 0x80;
-		tmp[2] = (w & 0x3F) + 0x80;
-	}
-	else if (w > 0xFFFF && w <= 0x10FFFF && tmp)
-	{
-		tmp[0] = (w >> 18) + 0xF0;
-		tmp[1] = ((w >> 12) & 0x3F) + 0x80;
-		tmp[2] = ((w >> 6) & 0x3F) + 0x80;
-		tmp[3] = (w & 0x3F) + 0x80;
-	}
+	else if (uni_trans_2(w, tmp))
+		return (tmp);
 	else
 		return (NULL);
 	return (tmp);

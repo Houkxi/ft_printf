@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:05:51 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 13:27:15 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 11:41:41 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,24 @@ void				new_data(t_info **data)
 	(*data)->s_ct[0] = 0;
 	(*data)->s_ct[1] = 0;
 	(*data)->s_ct[2] = 0;
+}
+
+char				*uni_trans_2(wchar_t w, char *tmp)
+{
+	if (w > 0x7FF && w <= 0xFFFF && tmp)
+	{
+		if (w >= 0xD800 && w <= 0xDFFF)
+			return (NULL);
+		tmp[0] = (w >> 12) + 0xE0;
+		tmp[1] = ((w >> 6) & 0x3F) + 0x80;
+		tmp[2] = (w & 0x3F) + 0x80;
+	}
+	else if (w > 0xFFFF && w <= 0x10FFFF && tmp)
+	{
+		tmp[0] = (w >> 18) + 0xF0;
+		tmp[1] = ((w >> 12) & 0x3F) + 0x80;
+		tmp[2] = ((w >> 6) & 0x3F) + 0x80;
+		tmp[3] = (w & 0x3F) + 0x80;
+	}
+	return (tmp);
 }

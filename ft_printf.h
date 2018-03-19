@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 14:56:11 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 19:06:31 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef	struct		s_info
 	int				nbr_l;
 	int				nbr_h;
 }					t_info;
+char				*bonus_part(va_list ***arg, t_info **data);
+char				*binairy_spec(va_list ****arg, t_info ***data);
 int					buff_rend(char *s, int len, int wrt);
 int					data_init(va_list **arg, t_info *data, char *s);
 void				new_data(t_info **data);
@@ -62,6 +64,7 @@ char				*ft_strcpy_dir(char *d, char *s, int dir, int start);
 void				nbr_cmp(void);
 char				*uni_conv(wchar_t *w, t_info *data, int spe, int y);
 int					uni_size(wchar_t w);
+char				*uni_trans_2(wchar_t w, char *tmp);
 void				wildcard_calc(va_list ***arg, t_info **data, int ct);
 
 #endif

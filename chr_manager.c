@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:21:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 19:05:05 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 19:01:26 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,15 @@ char	*the_lone_char(va_list ***arg, t_info *data)
 	return (save);
 }
 
-char	*chr_manager(va_list **arg, t_info *data)
+char	*the_multiple_char(va_list ***arg, t_info *data)
 {
 	char	*save;
 	wchar_t	*tmp;
 
 	save = NULL;
-	if ((save = the_lone_char(&arg, data)))
-		return (save);
-	else if (data->type == 's' && !(data->flgs & L))
+	if (data->type == 's' && !(data->flgs & L))
 	{
-		save = va_arg(**arg, char*);
+		save = va_arg(***arg, char*);
 		if (save == NULL)
 			save = ft_strdup("(null)");
 		else
@@ -61,11 +59,25 @@ char	*chr_manager(va_list **arg, t_info *data)
 	{
 		data->type = 'S';
 		data->s_ct[0] = -15;
-		tmp = va_arg(**arg, wchar_t*);
+		tmp = va_arg(***arg, wchar_t*);
 		if (!tmp || (uni_size(*tmp)) == 0)
 			save = ft_strdup("(null)");
 		else
 			save = uni_conv(tmp, data, 0, 0);
 	}
+	return (save);
+}
+
+char	*chr_manager(va_list **arg, t_info *data)
+{
+	char	*save;
+
+	save = NULL;
+	if ((save = the_lone_char(&arg, data)))
+		return (save);
+	else if ((save = the_multiple_char(&arg, data)))
+		return (save);
+	else
+		save = bonus_part(&arg, &data);
 	return (save);
 }

@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 17:47:28 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/15 18:22:20 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 14:18:35 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ char		*flag_prec(int prec, char *s, int size)
 	ft_bzero(new, prec);
 	new[prec] = '\0';
 	if (prec <= size)
-		return (ft_strcpy(new, s));
+	{
+		new = ft_strcpy(new, s);
+		ft_strdel(&s);
+		return (new);
+	}
 	while (size >= 0)
 	{
 		new[prec] = s[size];
@@ -57,7 +61,7 @@ char		*flag_prec(int prec, char *s, int size)
 	}
 	while (prec >= 0)
 		new[prec--] = '0';
-	free(s);
+	ft_strdel(&s);
 	return (new);
 }
 

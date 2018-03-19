@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 16:42:46 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/16 18:55:27 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/19 19:16:48 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ ft_printf("2_%-15.10#+y_ %12d salut\n", 10);*/
 /*printf(s1, 10, 12, 45, 20, ex2, ex3, ex2, s5);
 ft_printf(s1, 10, 12, 45, 20, ex2, ex3, ex2, s5);
 */
-setlocale(LC_ALL, "");
+//setlocale(LC_ALL, "");
 
 /*ft_printf("LET's SEe whEre You StoP oR stARt _%+10Z_\n");
 printf("LET's SEe whEre You StoP oR stARt _%+10Z_\n");
@@ -259,8 +259,8 @@ s[3] = '\0';
 	/*printf("%d\n", printf("O-----%C-\n", 254));
 	fflush(stdout);*/
 
-	printf("%d\n", ft_printf("-%-10.2ls-\n", L"〻 "));
-	printf("%d\n", printf("-%-10.2ls-\n", L"〻 "));
+/*	printf("%d\n", ft_printf("-%-10.2ls-\n", L"〻 "));
+	printf("%d\n", printf("-%-10.2ls-\n", L"〻 "));*/
 	/*printf("%d\n", printf("O-------%C-\n", 0x0002));
 	fflush(stdout);*/
 
@@ -390,15 +390,65 @@ s[3] = '\0';
 	fflush(stdout);
 	ft_printf("_%-10S_\n", L"ĝØĔᄉtestons䆶@");
 	printf("_%-10S_\n", L"ĝØĔᄉtestons䆶@");
-	fflush(stdout);
+	fflush(stdout);*/
+	/*ft_printf("\n");
+ft_printf("%%\n");
+ft_printf("%d\n", 42);
+ft_printf("%d%d\n", 42, 41);
+ft_printf("%d%d%d\n", 42, 43, 44);
+ft_printf("%ld\n", 2147483647);
+ft_printf("%lld\n", 9223372036854775807);
+ft_printf("%x\n", 505);
+ft_printf("%X\n", 505);
+ft_printf("%p\n", &ft_printf);
+ft_printf("%20.15d\n", 54321);
+ft_printf("%-10d\n", 3);
+ft_printf("% d\n", 3);
+ft_printf("%+d\n", 3);
+ft_printf("%010d\n", 1);
+ft_printf("%hhd\n", 0);
+ft_printf("%jd\n", 9223372036854775807);
+ft_printf("%zd\n", 4294967295);
+ft_printf("%\n");
+ft_printf("%U\n", 4294967295);
+ft_printf("%u\n", 4294967295);
+ft_printf("%o\n", 40);
+ft_printf("%%#08x\n", 42);
+ft_printf("%x\n", 1000);
+ft_printf("%#X\n", 1000);
+ft_printf("%s\n", NULL);
+ft_printf("%S\n", L"ݗݜशব");
+ft_printf("%s%s\n", "test", "test");
+ft_printf("%s%s%s\n", "test", "test", "test");
+ft_printf("%C\n", 15000);
 	ft_printf("_%10.5S_\n", L"salut 엹ᄉ䆶 ca va 엡");
 	printf("_%10.5S_\n", L"salut 엹ᄉ䆶 ca va 엡");
-	fflush(stdout);*/
-	/*ft_printf("_%S_ _%S_\n", 0x53, 0x3abcD, 0x81000);
-	printf("_%S_ _%S_ _%S_\n", 0x53, 0x3abcD, 0x81000);
-	fflush(stdout);*/
+	fflush(stdout);
+	ft_printf("_%C_ _%C_ _%C_\n", 0x53, 0x3abcD, 0x81000);
+	printf("_%C_ _%C_ _%C_\n", 0x53, 0x3abcD, 0x81000);
+	fflush(stdout);
 	ft_printf("%-+-12.7Dt%0 4i %04.2% et %lc titi\n", 125, 124, 256);
-	printf("%-+-12.7Dt%0 4i %04.2% et %lc titi\n", 125, 124, 256);
+	printf("%-+-12.7Dt%0 4i %04.2% et %lc titi\n", 125, 124, 256);*/
+
+			/*ft_printf("_%05d_\n", 0);
+			printf("_%05d_\n", 0);
+			fflush(stdout);*/
+
+			/*ft_printf("_%5.0d_\n", 0);
+			printf("_%5.0d_\n", 0);
+			fflush(stdout);
+
+			ft_printf("_%+1.0d_\n", 0);
+			printf("_%+1.0d_\n", 0);
+			fflush(stdout);*/
+
+			//ft_printf("%-+-12.7Dt%0 4i %04.2% et %lc titi\n", 125, 124, 256);
+			//printf("%-+-12.7Dt%0 4i %04.2% et %lc titi\n", 125, 124, 256);
+			char **tab;
+			tab = ft_newtab(8, 12, 'c');
+
+			ft_printf("YoBin : _%589 - 0.36t_\n", tab);
+			ft_printf("YoBin : _%055hb_\n", 245698);
 	//nbr_cmp();
 	//basics();
 	return (0);
