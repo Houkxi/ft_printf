@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:05:51 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 11:41:41 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:18:28 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,35 @@ char				*uni_trans_2(wchar_t w, char *tmp)
 		tmp[2] = ((w >> 6) & 0x3F) + 0x80;
 		tmp[3] = (w & 0x3F) + 0x80;
 	}
+	else
+		return (NULL);
 	return (tmp);
+}
+
+char				*flag_apos(char *s, int *size, int try)
+{
+	char			*new;
+	int				ct;
+	int				x;
+
+	ct = 0;
+	x = 0;
+	while (try > 3 && ct++ > 0)
+		try /= 3;
+	if (!(new = ft_strnew(*size + ct)))
+		return (NULL);
+	new[*size + ct] = '\0';
+	ct = 0;
+	try = *size;
+	while (s[x])
+	{
+		if (try % 3 == 0 && try != *size)
+			new[ct++] = ',';
+		new[ct++] = s[x++];
+		try--;
+	}
+	new[ct] = '\0';
+	ft_strdel(&s);
+	*size = ft_strlen(new);
+	return (new);
 }

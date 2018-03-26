@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 13:13:33 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 12:20:27 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:28:30 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static char		*uni_trans(wchar_t w, int size)
 	else if (uni_trans_2(w, tmp))
 		return (tmp);
 	else
+	{
+		ft_strdel(&tmp);
 		return (NULL);
+	}
 	return (tmp);
 }
 
@@ -76,7 +79,10 @@ static char		*uni_copy(char *s, int y, int x, wchar_t *w)
 
 	tmp = NULL;
 	if (!(tmp = uni_trans(w[x], y)))
+	{
+		ft_strdel(&s);
 		return (NULL);
+	}
 	s = ft_strncat(s, tmp, y);
 	free(tmp);
 	ft_bzero(tmp, y);

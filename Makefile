@@ -6,7 +6,7 @@
 #    By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/23 16:56:10 by mmanley           #+#    #+#              #
-#    Updated: 2018/03/19 19:02:32 by mmanley          ###   ########.fr        #
+#    Updated: 2018/03/26 18:12:52 by mmanley          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 OBJ_PATH = objs/
 
-INC = ~/libft/includes
+INC = libft/includes
 
 SRCS =	chr_manager.c\
 		flag_power.c\
@@ -32,7 +32,7 @@ SRCS =	chr_manager.c\
 		flags_chr.c\
 		wchar_conv.c\
 		bonus_part.c\
-		bonus_binary.c\
+		bonus_binairy.c\
 
 OBJS_NAME = $(SRCS:%.c=%.o)
 
@@ -42,27 +42,29 @@ all : $(NAME)
 
 $(OBJ_PATH) :
 	@if [ ! -d "objs" ]; then \
-	mkdir objs;\
-	fi
+		mkdir objs;\
+		fi
 
 $(OBJS): |$(OBJ_PATH)
 
 $(NAME) : $(OBJS)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+	@make -C libft
+	@cp libft/libft.a ./libftprintf.a
+	@ar rc libftprintf.a $(OBJS)
+	@ranlib libftprintf.a
 
 $(OBJ_PATH)%.o: %.c
 	$(CC) $(FLAGS) -o $@ -c $< -I $(INC)
 
 run :
-	@gcc -o ft_printf main.c checks/nbr_check.c libftprintf.a ~/libft/libft.a -I $(INC) && ./ft_printf
+	@gcc -o ft_printf main.c libftprintf.a libft/libft.a -I $(INC) && ./ft_printf
 
 clean :
+	@cd libft/ && $(MAKE) clean && cd ..
 	@rm -rf objs
 
 fclean : clean
+	@cd libft/ && $(MAKE) fclean && cd ..
 	@rm -rf $(NAME)
-	@rm ft_printf
-	@echo "Wanted files deleted : .a & .o"
 
 re : fclean all

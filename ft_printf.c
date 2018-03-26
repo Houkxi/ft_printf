@@ -6,25 +6,12 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 15:02:50 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 13:30:28 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:47:38 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <string.h>
-
-void			affichage(t_info data)
-{
-	printf("\n*************************-1-,\n---DATA---\nTYPE : %c\n",
-	data.type);
-	ft_putstr("FLGS : ");
-	ft_print_bits_int(data.flgs, 32);
-	printf("\n");
-	printf("\nMFIELD : %d\n", data.mfield);
-	printf("PREC : %d\n\n", data.prec);
-	printf("L : %d ---- H : %d\n*************************-2-'\n\n", data.nbr_l,
-	data.nbr_h);
-}
 
 static char		*no_type(t_info *data, char **tmp)
 {
@@ -97,7 +84,7 @@ int				ft_printf(char *s, ...)
 			x++;
 		buff_rend(&s[ret], x, 0);
 		if (s[ret + x] && !(ft_printf_2(&arg, &tmp, &s[ret + x], &x)))
-			return (-1);
+			return (buff_rend(NULL, 0, -1));
 		ret += x;
 		x = 0;
 	}

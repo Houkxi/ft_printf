@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 17:43:57 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 19:06:31 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/26 18:06:10 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char				*chr_manager(va_list **arg, t_info *data);
 char				*nbr_manager(va_list **arg, t_info *data);
 unsigned int		pars_check(t_info **data, char t, unsigned int sv);
 void				fl_ps(t_info **data, int size, int ch, unsigned int sv);
+char				*flag_apos(char *s, int *size, int oth);
 char				*flag_hash(int size, char *s, t_info *data);
 void				flag_manager(t_info *data, char *s, int size);
 void				flag_mfield_chr(int size, t_info *data, char *s,
@@ -66,5 +67,6 @@ char				*uni_conv(wchar_t *w, t_info *data, int spe, int y);
 int					uni_size(wchar_t w);
 char				*uni_trans_2(wchar_t w, char *tmp);
 void				wildcard_calc(va_list ***arg, t_info **data, int ct);
+int					ft_printf(char *s, ...);
 
 #endif

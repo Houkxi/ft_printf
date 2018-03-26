@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:21:30 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 19:01:26 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/22 14:26:37 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ char	*the_lone_char(va_list ***arg, t_info *data)
 			return (NULL);
 		c = (char)va_arg(***arg, intmax_t);
 		if (!c || c == 0)
-			save = ft_strdup("\0");
+			save[0] = '\0';
 		else
 			save[0] = c;
 	}
-	else if (data->type == 'C' || (data->type == 'c' && data->flgs & L))
+	else if ((data->type == 'C' || (data->type == 'c' && data->flgs & L)))
 	{
 		data->s_ct[0] = -15;
 		t = va_arg(***arg, wchar_t);
@@ -55,7 +55,7 @@ char	*the_multiple_char(va_list ***arg, t_info *data)
 		else
 			save = ft_strdup(save);
 	}
-	else if (data->type == 'S' || (data->type == 's' && data->flgs & L))
+	else if ((data->type == 'S' || (data->type == 's' && data->flgs & L)))
 	{
 		data->type = 'S';
 		data->s_ct[0] = -15;

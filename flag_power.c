@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 19:31:00 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 18:21:55 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/20 14:21:52 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void		flag_4_nbrs(t_info *data, char *s, int size, unsigned int sv)
 	sign = 0;
 	new = ft_strdup(s);
 	ft_strdel(&s);
+	if (sv & AP)
+		new = flag_apos(new, &size, size);
 	if (sv & DOT)
 	{
 		new = flag_prec(data->prec, new, size);

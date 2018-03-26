@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:58:59 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 19:17:32 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/22 11:49:30 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int					tab_size(char **tab, int ct)
 		x = 0;
 		y++;
 	}
-	return (ct);
+	return (ct + y);
 }
 
 char				*tab_to_char(char *new, char **tab, int z)
@@ -73,17 +73,33 @@ char				*tab_spec(va_list ****arg, t_info ***data)
 	return (new);
 }
 
+char				*base_spec(va_list ****arg, t_info ***data)
+{
+	char			*new;
+	int				b;
+
+	(**data)->flgs &= 0xFFFF00A1;
+	b = (**data)->prec % 16;
+	if (b == 0)
+		b = 16;
+	if (b == 1)
+		new = ft_strdup("--Base 1 useless--");
+	else
+		new = ft_itoall((long long int)(va_arg(****arg, intmax_t)), b, 0,
+	&(**data)->s_ct[0]);
+	return (new);
+}
+
 char				*bonus_part(va_list ***arg, t_info **data)
 {
 	char			*rendu;
 
 	rendu = NULL;
 	if ((*data)->type && (*data)->type == 'b')
-	{
-		(*data)->flgs &= 0xFFFF00B1;
 		rendu = binairy_spec(&arg, &data);
-	}
-	if ((*data)->type && (*data)->type == 't')
+	else if ((*data)->type && (*data)->type == 'B')
+		rendu = base_spec(&arg, &data);
+	else if ((*data)->type && (*data)->type == 't')
 		rendu = tab_spec(&arg, &data);
 	return (rendu);
 }

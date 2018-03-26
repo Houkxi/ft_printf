@@ -6,7 +6,7 @@
 /*   By: mmanley <mmanley@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 12:14:54 by mmanley           #+#    #+#             */
-/*   Updated: 2018/03/19 18:13:57 by mmanley          ###   ########.fr       */
+/*   Updated: 2018/03/20 18:49:27 by mmanley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static	unsigned int	basc(char *s, unsigned int sv, t_info ***data, int *xb)
 	s[*xb] && s[*xb] == '+' ? sv |= PLUS : sv;
 	s[*xb] && s[*xb] == '#' ? sv |= HASH : sv;
 	s[*xb] && s[*xb] == ' ' ? sv |= SPACE : sv;
+	s[*xb] && s[*xb] == '\'' ? sv |= AP : sv;
 	return (sv);
 }
 
@@ -46,14 +47,13 @@ static unsigned int		fcn(char *s, unsigned int sv, t_info ***data, int *x)
 	? sv |= ZERO : sv;
 	if (s[*x] && s[*x + 1] && s[*x] == '.')
 	{
-		(**data)->prec = ft_atoi(&s[*x + 1]);
-		*x += 1;
-		if (ft_isdigit(s[*x]) == 1)
-			*x += rec_nbr_count((**data)->prec, 0, 10);
-		while (s[*x] && s[*x] == '0')
+		while (ft_occ_pos(".0123456789", s[*x]) > -1)
+		{
+			if (s[*x] == '.')
+				(**data)->prec = *x;
 			*x += 1;
+		}
 		sv |= DOT;
-		s[*x] && s[*x + 1] && (s[*x] >= '0' && s[*x] <= '9') ? *x += 1 : *x;
 	}
 	if (s[*x] && s[*x] == '*')
 		star_spe(s, &data, *x);
@@ -74,21 +74,21 @@ static char				type_check(char *s, t_info **data)
 	char				*type;
 
 	x = 0;
-	type = "dDioOxXuUbpcCsSt %#*0+-.hjzlL$123456789q_";
-	while (s[x] && (ret = ft_occ_pos(type, s[x])) > 15 && ++x)
+	type = "dDioOxXuUpbBcCsSt %#*0+-'.hjzlL$123456789q_";
+	while (s[x] && (ret = ft_occ_pos(type, s[x])) > 16 && ++x)
 	{
 		(*data)->flgs = fcn(s, (*data)->flgs, &data, &x);
 		(*data)->flgs = basc(s, (*data)->flgs, &data, &x);
 		if (s[x] && x != 0 && s[x] == '%')
 		{
-			ret = 17;
+			ret = 18;
 			break ;
 		}
 	}
-	if (ret >= 0 && ret <= 10)
+	if (ret >= 0 && ret <= 11)
 		(*data)->flgs |= DEC;
 	(*data)->type = s[x];
-	if (ret == -1 || ret > 15)
+	if (ret == -1 || ret > 16)
 		(*data)->flgs |= STOP;
 	return (x);
 }
@@ -100,6 +100,8 @@ int						data_init(va_list **arg, t_info *data, char *s)
 	ct = 1;
 	new_data(&data);
 	data->cmd_size = type_check(s, &data);
+	if (data->flgs & DOT && data->prec != -1)
+		data->prec = ft_atoi(&s[data->prec + 1]);
 	wildcard_calc(&arg, &data, 1);
 	if (data->flgs & STOP)
 		return (-1);
