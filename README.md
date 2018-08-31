@@ -46,11 +46,11 @@ Some new flags :
  - t print a char matrix
  
  example : 
- ```
+ ```C
  ft_printf("********\n%t\n********\n", tab)
  ```
  Output :
- ```
+ ```C
  ********
  This is a char
  matrix of
