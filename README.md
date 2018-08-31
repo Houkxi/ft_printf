@@ -37,7 +37,7 @@ All errors must be delt accordingly and exited properly. No unexepected quit of 
 Run ```make``` to compile the libftprintf.a
 
 Then compile any project with the library : 
-```
+```C
 gcc -Wall -Werror -Wextra main.c libftprintf.a -I includes
 ```
 Some new flags :
