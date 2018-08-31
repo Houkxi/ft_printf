@@ -53,8 +53,8 @@ Some new flags :
  ```
  ********
  This is a char
- matrix of.
- Variable size for each string
+ matrix of
+ variable size for each string.
  ********
  ```
  
